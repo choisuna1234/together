@@ -1,0 +1,278 @@
+drop table photo purge; --테이블 삭제
+drop table board_comm purge; --테이블 삭제
+drop table board_comm_cate purge; --테이블 삭제
+drop table review purge; --테이블 삭제
+drop table place_menu purge; --테이블 삭제
+drop table place purge; --테이블 삭제
+drop table place_cate purge; --테이블 삭제
+drop table together_with purge; --테이블 삭제
+drop table together purge; --테이블 삭제
+drop table together_cate purge; --테이블 삭제
+drop table members purge; --테이블 삭제
+drop table weight purge; --테이블 삭제
+drop table breed purge; --테이블 삭제
+drop sequence seq_photo; --시퀀스 삭제
+drop sequence seq_board_comm; --시퀀스 삭제
+drop sequence seq_board_comm_cate; --시퀀스 삭제
+drop sequence seq_review; --시퀀스 삭제
+drop sequence seq_place_menu; --시퀀스 삭제
+drop sequence seq_place; --시퀀스 삭제
+drop sequence seq_place_cate; --시퀀스 삭제
+drop sequence seq_together_with; --시퀀스 삭제
+drop sequence seq_together; --시퀀스 삭제
+drop sequence seq_together_cate; --시퀀스 삭제
+drop sequence seq_weight; --시퀀스 삭제
+drop sequence seq_breed; --시퀀스 삭제
+
+commit;
+
+create sequence seq_breed start with 1 increment by 1 nomaxvalue nocache; --시퀀스 생성
+create table breed( --테이블 생성
+    br_idx number primary key not null,
+    br_name varchar2(30) unique not null
+);
+create sequence seq_weight start with 1 increment by 1 nomaxvalue nocache; --시퀀스 생성
+create table weight( --테이블 생성
+    wt_idx number primary key not null,
+    wt_start number(10) not null,
+    wt_end number(10) not null
+);
+create table members( --테이블 생성
+    mem_id varchar2(36) primary key not null,
+    mem_pw varchar2(15),
+    mem_call varchar2(20) not null,
+    mem_email varchar2(100) not null,
+    mem_addr varchar2(255),
+    mem_type number(1) default 1,
+    mem_ph_idx number,
+    mem_dog_name varchar2(50) not null,
+    mem_dog_num number(15),
+    mem_br_idx number,
+    mem_br_name varchar2(30),
+    mem_dog_weight number(10) not null,
+    mem_dog_mbti varchar2(10),
+    mem_dog_etc varchar2(255),
+    mem_reg_date date default sysdate,
+    mem_mod_date date default sysdate,
+    mem_del_gb varchar2(1) default 'N'
+);
+create sequence seq_together_cate start with 1 increment by 1 nomaxvalue nocache; --시퀀스 생성
+create table together_cate( --테이블 생성
+    tc_idx number primary key not null,
+    tc_name varchar2(30) unique not null,
+    tc_count number default 0
+);
+create sequence seq_together start with 1 increment by 1 nomaxvalue nocache; --시퀀스 생성
+create table together( --테이블 생성
+    to_idx number primary key not null,
+    to_title varchar2(150) not null,
+    to_tc_name varchar2(30),
+    to_contents varchar2(3000) not null,
+    to_writer_id varchar2(36),
+    to_writer_name varchar2(50),
+    to_date date default sysdate,
+    to_time number(1) default 1,
+    to_people number(10) not null,
+    to_join_people number(10) default 1,
+    to_loc varchar2(255) not null,
+    to_br_name varchar2(30),
+    to_wt_idx number,
+    to_reg_date date default sysdate,
+    to_mod_date date default sysdate,
+    to_del_gb varchar2(1) default 'N'
+);
+create sequence seq_together_with start with 1 increment by 1 nomaxvalue nocache; --시퀀스 생성
+create table together_with( --테이블 생성
+    tw_idx number primary key not null,
+    tw_to_idx number,
+    tw_mem_id varchar2(36)
+);
+create sequence seq_place_cate start with 1 increment by 1 nomaxvalue nocache; --시퀀스 생성
+create table place_cate( --테이블 생성
+    pc_idx number primary key not null,
+    pc_name varchar2(30) unique not null
+);
+create sequence seq_place start with 1 increment by 1 nomaxvalue nocache; --시퀀스 생성
+create table place( --테이블 생성
+    pl_idx number primary key not null,
+    pl_name varchar2(75) not null,
+    pl_cate varchar2(30),
+    pl_ph_idx number,
+    pl_call varchar2(20),
+    pl_loc varchar2(255) not null,
+    pl_offday varchar2(14),
+    pl_open varchar2(4),
+    pl_close varchar2(4),
+    pl_mod_date date default sysdate,
+    pl_del_gb varchar2(1) default 'N'
+);
+create sequence seq_place_menu start with 1 increment by 1 nomaxvalue nocache; --시퀀스 생성
+create table place_menu( --테이블 생성
+    pm_idx number primary key not null,
+    pm_pl_idx number,
+    pm_name varchar2(30) not null,
+    pm_price number not null
+);
+create sequence seq_review start with 1 increment by 1 nomaxvalue nocache; --시퀀스 생성
+create table review( --테이블 생성
+    re_idx number primary key not null,
+    re_pl_idx number,
+    re_writer_id varchar2(36),
+    re_writer_name varchar2(50),
+    re_star number(1) not null,
+    re_ph_idx number,
+    re_contents varchar2(3000) not null,
+    re_reg_date date default sysdate,
+    re_mod_date date default sysdate,
+    re_del_gb varchar2(1) default 'N'
+);
+create sequence seq_board_comm_cate start with 1 increment by 1 nomaxvalue nocache; --시퀀스 생성
+create table board_comm_cate( --테이블 생성
+    bcc_idx number primary key not null,
+    bcc_name varchar2(30) unique not null
+);
+create sequence seq_board_comm start with 1 increment by 1 nomaxvalue nocache; --시퀀스 생성
+create table board_comm( --테이블 생성
+    bc_idx number primary key not null,
+    bc_bcc_name varchar2(30),
+    bc_title varchar2(150),
+    bc_contents varchar2(3000),
+    bc_writer_id varchar2(36),
+    bc_writer_name varchar2(50),
+    bc_readhit number,
+    bc_reg_date date default sysdate,
+    bc_mod_date date default sysdate,
+    bc_del_gb varchar2(1) default 'N'
+);
+create sequence seq_photo start with 1 increment by 1 nomaxvalue nocache; --시퀀스 생성
+create table photo( --테이블 생성
+    ph_idx number primary key not null,
+    ph_board_idx number not null,
+    ph_board_type varchar2(30) not null,
+    ph_original_file_name varchar2(50) not null,
+    ph_stored_file_name varchar2(50) not null,
+    ph_file_size number not null,
+    ph_reg_date date default sysdate,
+    ph_del_gb varchar2(1) default 'N'
+);
+
+commit;
+
+comment on table breed is '견종 테이블';
+comment on column breed.br_idx is '견종 번호';
+comment on column breed.br_name is '견종명';
+
+comment on table weight is '몸무게 테이블';
+comment on column weight.wt_idx is '몸무게 번호';
+comment on column weight.wt_start is '몸무게 시작 범위';
+comment on column weight.wt_end is '몸무게 종료 범위';
+
+comment on table members is '회원 정보 테이블';
+comment on column members.mem_id is '아이디';
+comment on column members.mem_pw is '비밀번호';
+comment on column members.mem_call is '전화번호';
+comment on column members.mem_email is '이메일';
+comment on column members.mem_addr is '주소';
+comment on column members.mem_type is '회원 유형 / 관리자: 0, 일반회원: 1, SNS: 2';
+comment on column members.mem_ph_idx is '사진번호 / 사진테이블을 참조하나, 등록 안할수도 있음으로 FK 설정 제외';
+comment on column members.mem_dog_name is '강아지 이름(닉네임)';
+comment on column members.mem_dog_num is '동물등록 번호';
+comment on column members.mem_br_idx is '견종번호';
+comment on column members.mem_br_name is '견종명';
+comment on column members.mem_dog_weight is '몸무게';
+comment on column members.mem_dog_mbti is '강아지 성격';
+comment on column members.mem_dog_etc is '강아지 특이사항';
+comment on column members.mem_reg_date is '등록날짜 ';
+comment on column members.mem_mod_date is '수정날짜';
+comment on column members.mem_del_gb is '탈퇴여부 / 정상: N, 탈퇴: Y';
+
+comment on table together_cate is '함께해요 분류 테이블';
+comment on column together_cate.tc_idx is '함께해요 분류 번호';
+comment on column together_cate.tc_name is '함께해요 분류명 / 산책해요, 러닝해요, 친구해요 등';
+comment on column together_cate.tc_count is '함께해요 분류 게시글 수 / 인기순 정렬을 위함';
+
+comment on table together is '함께해요 게시판 테이블';
+comment on column together.to_idx is '함께해요 게시판 번호';
+comment on column together.to_title is '제목';
+comment on column together.to_tc_name is '분류';
+comment on column together.to_contents is '내용';
+comment on column together.to_writer_id is '작성자 아이디';
+comment on column together.to_writer_name is '작성자 강아지 이름(닉네임) / 회원 테이블을 참조하나, 이름이 UQ 가 아님으로  FK 설정 제외';
+comment on column together.to_date is '날짜';
+comment on column together.to_time is '시간';
+comment on column together.to_people is '모임 인원';
+comment on column together.to_join_people is '참여 인원';
+comment on column together.to_loc is '장소';
+comment on column together.to_br_name is '참여 가능 견종';
+comment on column together.to_wt_idx is '참여 가능 사이즈';
+comment on column together.to_reg_date is '등록날짜 ';
+comment on column together.to_mod_date is '수정날짜';
+comment on column together.to_del_gb is '삭제 여부 / 정상: N, 삭제: Y';
+
+comment on table together_with is '함께해요 참여자 테이블';
+comment on column together_with.tw_idx is '참여자 번호';
+comment on column together_with.tw_to_idx is '함께해요 게시판 번호';
+comment on column together_with.tw_mem_id is '참여자 ID';
+
+comment on table place_cate is '시설 분류 테이블';
+comment on column place_cate.pc_idx is '시설 분류 번호';
+comment on column place_cate.pc_name is '시설 분류명 / 병원, 펜션, 공원, 카페식당, 기타 등';
+
+comment on table place is '시설 테이블';
+comment on column place.pl_idx is '시설 번호';
+comment on column place.pl_name is '시설 이름';
+comment on column place.pl_cate is '시설 분류명';
+comment on column place.pl_ph_idx is '사진번호 / 띄어쓰기 없이 배열처럼 작성 넣기 사진테이블을 참조하나, 등록 안하거나 여러개 할수도 있어 FK 설정 제외';
+comment on column place.pl_call is '시설 전화번호';
+comment on column place.pl_loc is '시설 위치';
+comment on column place.pl_offday is '시설 휴무일 / 띄어쓰기 없이 배열처럼 작성 넣기 0: 일, 1: 월, 2: 화 3:수, 4: 목, 5:금, 6: 토';
+comment on column place.pl_open is '시설 운영 시작 시간 / 네자리 숫자형식 0930';
+comment on column place.pl_close is '시설 운영 종료 시간 / 네자리 숫자형식 0930';
+comment on column place.pl_mod_date is '수정날짜';
+comment on column place.pl_del_gb is '삭제 여부 / 정상: N, 삭제: Y';
+
+comment on table place_menu is '시설 메뉴 테이블';
+comment on column place_menu.pm_idx is '시설 메뉴 번호';
+comment on column place_menu.pm_pl_idx is '시설 번호';
+comment on column place_menu.pm_name is '메뉴명';
+comment on column place_menu.pm_price is '가격';
+
+comment on table review is '리뷰 테이블';
+comment on column review.re_idx is '리뷰 번호';
+comment on column review.re_pl_idx is '시설 번호';
+comment on column review.re_writer_id is '작성자 아이디';
+comment on column review.re_writer_name is '작성자 강아지 이름(닉네임) / 회원 테이블을 참조하나, 이름이 UQ 가 아님으로  FK 설정 제외';
+comment on column review.re_star is '리뷰 별점';
+comment on column review.re_ph_idx is '사진번호 / 띄어쓰기 없이 배열처럼 작성 넣기 사진테이블을 참조하나, 등록 안하거나 여러개 할수도 있어 FK 설정 제외';
+comment on column review.re_contents is '후기내용';
+comment on column review.re_reg_date is '등록날짜 ';
+comment on column review.re_mod_date is '수정날짜';
+comment on column review.re_del_gb is '삭제여부';
+
+comment on table board_comm_cate is '일반 게시판 분류 테이블';
+comment on column board_comm_cate.bcc_idx is '일반 게시판 분류 번호';
+comment on column board_comm_cate.bcc_name is '일반 게시판 분류명';
+
+comment on table board_comm is '일반 게시판 테이블';
+comment on column board_comm.bc_idx is '일반 게시판 번호';
+comment on column board_comm.bc_bcc_name is '일반 게시판 분류명';
+comment on column board_comm.bc_title is '제목';
+comment on column board_comm.bc_contents is '내용';
+comment on column board_comm.bc_writer_id is '작성자 아이디';
+comment on column board_comm.bc_writer_name is '작성자 강아지 이름(닉네임) / 회원 테이블을 참조하나, 이름이 UQ 가 아님으로  FK 설정 제외';
+comment on column board_comm.bc_readhit is '조회수';
+comment on column board_comm.bc_reg_date is '등록날짜 ';
+comment on column board_comm.bc_mod_date is '수정날짜';
+comment on column board_comm.bc_del_gb is '삭제여부';
+
+comment on table photo is '사진 테이블';
+comment on column photo.ph_idx is '사진번호';
+comment on column photo.ph_board_idx is '글 번호';
+comment on column photo.ph_board_type is '테이블명 / (members , place , review 중 1개)';
+comment on column photo.ph_original_file_name is '원본 이름';
+comment on column photo.ph_stored_file_name is '저장시 이름';
+comment on column photo.ph_file_size is '파일크기';
+comment on column photo.ph_reg_date is '등록날짜';
+comment on column photo.ph_del_gb is '삭제구분';
+
+commit;
