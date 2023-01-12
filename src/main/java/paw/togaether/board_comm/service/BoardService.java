@@ -1,10 +1,17 @@
 package paw.togaether.board_comm.service;
 
+import java.util.List;
 import java.util.Map;
 
 public interface BoardService {
 	
-	//공지사항 글쓰기
+	// 게시판 리스트 띄우기
+	List<Map<String, Object>> boardList(Map<String, Object> map) throws Exception;
+	
+	//멍멍왈왈 게시판 글쓰기
 	void boardWrite(Map<String, Object> map) throws Exception;
+	
+	//게시판 디테일
+	Map<String, Object> boardDetail(Map<String, Object> map) throws Exception;
 		
 }

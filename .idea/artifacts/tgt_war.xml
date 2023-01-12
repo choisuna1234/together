@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="tgt:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>tgt</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="TGT.war">
+      <element id="artifact" artifact-name="tgt:war exploded" />
+    </root>
+  </artifact>
+</component>
