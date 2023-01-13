@@ -21,7 +21,7 @@
 		</button>
 		<ul class="sub_pages flexCenter">
 			<li><a class="paw_hover" href="">함께해요</a></li>
-			<li><a class="paw_hover" href="">멍멍왈왈</a></li>
+			<li><a class="paw_hover" href="/board_list.paw">멍멍왈왈</a></li>
 			<li><a class="paw_hover" href="">개BTI</a></li>
 			<li><a class="paw_hover" href="">우리동네</a></li>
 		</ul>

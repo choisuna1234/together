@@ -39,36 +39,9 @@
 			</tr>
 		</tbody>
 	</table>
-	<a href="/board_list.paw" class="btn" id="list">목록으로</a>
+	<a href="/board_list.paw" class="btn">목록으로</a>
 	<a href="" class="btn" id="update">수정하기</a>
-	
-	<script type="text/javascript">
-		$(document).ready(function(){
-			$("#list").on("click", function(e){ //목록으로 버튼
-				e.preventDefault();
-				fn_openBoardList();
-			});
-			
-			$("#update").on("click", function(e){
-				e.preventDefault();
-				fn_openBoardUpdate();
-			});
-		});
-		
-		function fn_openBoardList(){
-			var comSubmit = new ComSubmit();
-			comSubmit.setUrl("<c:url value='/sample/openBoardList.do' />");
-			comSubmit.submit();
-		}
-		
-		function fn_openBoardUpdate(){
-			var idx = "${map.IDX}";
-			var comSubmit = new ComSubmit();
-			comSubmit.setUrl("<c:url value='/sample/openBoardUpdate.do' />");
-			comSubmit.addParam("IDX", idx);
-			comSubmit.submit();
-		}
-	</script>
+
 </body>
 </body>
 </html>

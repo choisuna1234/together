@@ -180,7 +180,11 @@ section.notice {
 		<section class="notice">
 			<div class="page-title">
 				<div class="container">
-					<h3>멍멍왈왈</h3>
+						<center>
+						<a href="/board_list.paw"> 
+						<img src="/resources/image/board_comm_mongmong.PNG">
+						</a>
+		                </center>
 				</div>
 			</div>
 			<!-- board seach area -->
@@ -205,10 +209,11 @@ section.notice {
 					<table class="board-table">
 						<thead>
 							<tr>
-								<th scope="col">글번호</th>
-								<th scope="col">제목</th>
-								<th scope="col">조회수</th>
-								<th scope="col">작성일</th>
+								<th width="10%">글번호</th>
+								<th width="60%">제목</th>
+								<th width="10%">조회수</th>
+								<th width="10%">작성자</th>
+								<th width="10%">작성일</th>
 
 							</tr>
 						</thead>
@@ -217,13 +222,13 @@ section.notice {
 								<c:when test="${fn:length(list) > 0}">
 									<c:forEach items="${list }" var="row">
 
-										<tr align="center" class="use_move"
-											data-href="board_detail.paw"
-											onclick="move(this, 'in', 'BC_IDX')">
-											<td>${row.BC_IDX }</td>
-											<td>${row.BC_TITLE }</td>
-											<td>${row.BC_READHIT }</td>
-											<td>${row.BC_MOD_DATE }</td>
+										<tr align="center" class="use_move" data-href="board_detail.paw"
+											onclick="move(this,'BC_IDX:${row.BC_IDX}')">
+											<td width="10%">${row.BC_IDX }</td>
+											<td width="60%">${row.BC_TITLE }</td>
+											<td width="10%">${row.BC_READHIT }</td>
+											<td width="10%">${row.BC_WRITER_ID }</td>
+											<td width="10%">${row.BC_MOD_DATE }</td>
 										</tr>
 									</c:forEach>
 								</c:when>
@@ -233,13 +238,13 @@ section.notice {
 									</tr>
 								</c:otherwise>
 							</c:choose>
-
 						</tbody>
 					</table>
+					<br>
+					<a href="board_writeForm.paw" class="btn submit" style="float: right">글쓰기</a>
 				</div>
 			</div>
 			<br> 
-			<a href="board_write.paw" class="btn submit" style="float: right">글쓰기</a>
 		</section>
 	</body>
 </main>
