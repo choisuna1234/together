@@ -32,7 +32,6 @@ section.notice {
 
 #board-search .search-window .search-wrap {
 	position: relative;
-	/*   padding-right: 124px; */
 	margin: 0 auto;
 	width: 80%;
 	max-width: 564px;
