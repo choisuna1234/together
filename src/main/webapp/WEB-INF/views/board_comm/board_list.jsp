@@ -208,7 +208,7 @@ section.notice {
 					<table class="board-table">
 						<thead>
 							<tr>
-								<th width="10%">글번호</th>
+								<th width="10%">NO.</th>
 								<th width="60%">제목</th>
 								<th width="10%">조회수</th>
 								<th width="10%">작성자</th>
@@ -227,7 +227,7 @@ section.notice {
 											<td width="60%">${row.BC_TITLE }</td>
 											<td width="10%">${row.BC_READHIT }</td>
 											<td width="10%">${row.BC_WRITER_ID }</td>
-											<td width="10%">${row.BC_MOD_DATE }</td>
+											<td><fmt:formatDate value="${row.BC_MOD_DATE}" pattern="yyyy-MM-dd" /></td>
 										</tr>
 									</c:forEach>
 								</c:when>

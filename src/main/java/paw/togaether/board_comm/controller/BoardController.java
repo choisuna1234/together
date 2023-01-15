@@ -11,9 +11,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import lombok.extern.log4j.Log4j;
 import paw.togaether.board_comm.service.BoardService;
 import paw.togaether.common.domain.CommandMap;
 
+
+
+@Log4j
 @Controller
 public class BoardController {
 	
@@ -60,29 +64,33 @@ public class BoardController {
 		return mv;
 	}
 	
+	
 	//게시글 수정하기폼
 	@RequestMapping(value="/board_modifyForm.paw")
 	public ModelAndView boardModifyForm(CommandMap commandMap) throws Exception {
 		ModelAndView mv = new ModelAndView("/board_comm/board_modify");
 		
-		Map<String, Object> map = boardService.boardDetail(commandMap.getMap());
+		Map<String,Object> map = boardService.boardDetail(commandMap.getMap());
 		mv.addObject("map", map);
 		
-		return mv;
-	}
-	
-	// 게시글 수정하기 
-	@RequestMapping(value = "/board_modify.paw")
-	public ModelAndView boardModify(CommandMap commandMap) throws Exception {
-		ModelAndView mv = new ModelAndView("redirect:board_list.paw");
-
-		boardService.boardModify(commandMap.getMap());
-		mv.addObject("BC_IDX", commandMap.get("BC_IDX"));
-
-		return mv;
-	}
-	
-	
 		
+		return mv;
+	}
 	
+	
+	
+	/*
+	 * // 게시글 수정하기
+	 * 
+	 * @RequestMapping(value = "/board_modify.paw") public ModelAndView
+	 * boardModify(CommandMap commandMap) throws Exception { ModelAndView mv = new
+	 * ModelAndView("redirect:board_list.paw");
+	 * 
+	 * boardService.boardModify(commandMap.getMap()); mv.addObject("BC_IDX",
+	 * commandMap.get("BC_IDX"));
+	 * 
+	 * return mv; }
+	 */
+	
+
 }
