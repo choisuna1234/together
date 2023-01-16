@@ -35,7 +35,8 @@
 		    BC_READHIT, 
 		    BC_DEL_GB, 
 		    BC_REG_DATE, 
-		    BC_WRITER_NAME
+		    BC_WRITER_NAME,
+		    BC_BCC_NAME
 		)
 		VALUES
 		(
@@ -45,7 +46,8 @@
 		    0, 
 		    'N', 
 		    SYSDATE, 
-		    'Admin'
+		    'Admin',
+		    #{BC_BCC_NAME, jdbcType=VARCHAR}
         )
    ]]>
 </insert>

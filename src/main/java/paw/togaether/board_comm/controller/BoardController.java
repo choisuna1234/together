@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import lombok.extern.log4j.Log4j;
 import paw.togaether.board_comm.service.BoardService;
@@ -35,9 +36,9 @@ public class BoardController {
 		List<Map<String, Object>> list = boardService.boardList(commandMap.getMap());
 
 		mv.addObject("list", list); //글번호,제목,조회수,작성자,작성날짜 담아줌
-
 		return mv;
 	}
+
 
 	// 멍멍왈왈 게시판 글 등록폼
 	@RequestMapping(value="/board/writeForm")
@@ -48,9 +49,10 @@ public class BoardController {
 	
 	// 멍멍왈왈 게시판 글 등록
 	@RequestMapping(value = "/board/write")
-	public ModelAndView boardWrite(CommandMap commandMap) throws Exception {
+	public ModelAndView boardWrite(CommandMap commandMap, RedirectAttributes redirect) throws Exception {
 		ModelAndView mv = new ModelAndView("redirect:/board/list.paw");
 	    boardService.boardWrite(commandMap.getMap());
+	    redirect.addFlashAttribute("success", "글 작성이 완료되었습니다.");
 		return mv;
 	}
 	
@@ -82,11 +84,12 @@ public class BoardController {
 	
 	// 게시글 수정하기
 	@RequestMapping(value = "/board/modify", method = RequestMethod.POST)
-	public ModelAndView boardModify(CommandMap commandMap) throws Exception {
+	public ModelAndView boardModify(CommandMap commandMap, RedirectAttributes redirect) throws Exception {
 		ModelAndView mv = new ModelAndView("redirect:/board/list.paw");
 
 		boardService.boardModify(commandMap.getMap());
 		mv.addObject("BC_IDX", commandMap.get("BC_IDX"));
+		redirect.addFlashAttribute("success", "글 수정이 완료되었습니다.");
 
 		return mv;
 	}
@@ -94,11 +97,11 @@ public class BoardController {
 	
 	//게시글 삭제하기
 	@RequestMapping(value = "/board/delete", method = RequestMethod.POST )
-	public ModelAndView boardDelete(CommandMap commandMap) throws Exception {
+	public ModelAndView boardDelete(CommandMap commandMap, RedirectAttributes redirect) throws Exception {
 		ModelAndView mv = new ModelAndView("redirect:/board/list.paw");
 		
 		boardService.boardDelete(commandMap.getMap());
-
+		redirect.addFlashAttribute("warning", "글 삭제가 완료되었습니다.");
 		return mv;
 	}
 	

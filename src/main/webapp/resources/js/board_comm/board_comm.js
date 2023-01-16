@@ -1,3 +1,5 @@
+
+
 /* ===================== board write.jsp 게시글 유효성 검사 ===================== */
 function checkConfirm() {
 		var frm = document.getElementById("frm");
@@ -10,11 +12,15 @@ function checkConfirm() {
 			return false;
 		}
 		else if (BC_CONTENTS.value.length == 0) {
-			alert("내용 입력하세요.");
+			alert("내용을 입력하세요.");
 			return false;
 		}
 		return true;
 	}
-	
-	
-	
+
+
+function returntoList(){
+		if (confirm("목록으로 이동하시겠습니까?")){
+			location.href='/board/list.paw';
+		}
+	}
