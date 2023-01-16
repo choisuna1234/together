@@ -92,4 +92,17 @@
 	]]>
 </update> 
 
+<!-- 게시글 삭제하기 -->
+<update id="boardDelete" parameterType="hashmap">
+	<![CDATA[
+	UPDATE 
+		BOARD_COMM
+	SET
+		 BC_DEL_GB='Y'
+	WHERE 
+		BC_IDX = #{BC_IDX}
+
+	]]>
+</update> 
+
 </mapper>

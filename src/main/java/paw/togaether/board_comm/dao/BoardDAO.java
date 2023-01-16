@@ -37,7 +37,10 @@ public class BoardDAO extends AbstractDAO {
 		update("Board.boardHit", map);
 	}
 	
+	//멍멍왈왈 글 삭제하기
+	public void boardDelete(Map<String, Object> map) throws Exception {
+		update("Board.boardDelete", map);
+	}
 	
 	
-
 }
