@@ -48,8 +48,8 @@
 						</div>
 						<br>
 						<div class="lastFont">
-							<a href="/board/list.paw" class="btn normal" onclick="alert('목록으로 이동하시겠습니까?');">목록으로</a> 
-							<input class="btn submit" type="submit" value="수정하기" onclick="return checkConfirm();, alert('수정이 완료되었습니다');">
+							<a href="/board/list.paw" class="btn normal" onclick="returntoList();">목록으로</a> 
+							<input class="btn submit" type="submit" value="수정하기" onclick="return checkConfirm();">
 						</div>
 					</form>
 	</body>

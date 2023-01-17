@@ -8,7 +8,8 @@
 	<script src="/resources/js/board_comm/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 <script>
-$(document).ready(function() {
+/* 이 페이지에서만 적용되는 제이쿼리라 따로 빼놈 - 등록 완료 후 이벤트 처리 */
+$(function() {
 	if ('${success}'){
 		toastr.success('${success}');
 		
@@ -58,9 +59,9 @@ $(document).ready(function() {
 						<thead>
 							<tr>
 								<th width="5%">NO.</th>
-								<th width="5%">카테고리</th>
-								<th width="60%">제목</th>
-								<th width="10%">조회수</th>
+								<th width="15%">카테고리</th>
+								<th width="45%">제목</th>
+								<th width="5%">조회수</th>
 								<th width="10%">작성자</th>
 								<th width="10%">작성일</th>
 
@@ -73,12 +74,12 @@ $(document).ready(function() {
 
 										<tr align="center" class="use_move" data-href="/board/detail.paw"
 											onclick="move(this,'BC_IDX:${row.BC_IDX}')">
-											<td width="5%">${row.BC_BCC_NAME }</td>
-											<td width="10%">${row.BC_IDX }</td>
-											<td width="50%">${row.BC_TITLE }</td>
+											<td width="5%">${row.BC_IDX }</td>
+											<td width="15%">${row.BC_BCC_NAME }</td>
+											<td width="45%">${row.BC_TITLE }</td>
 											<td width="5%">${row.BC_READHIT }</td>
-											<td width="5%">${row.BC_WRITER_ID }</td>
-											<td><fmt:formatDate value="${row.BC_MOD_DATE}" pattern="yyyy-MM-dd" /></td>
+											<td width="10%">${row.BC_WRITER_ID }</td>
+											<td width="10%"><fmt:formatDate value="${row.BC_MOD_DATE}" pattern="yyyy-MM-dd" /></td>
 										</tr>
 									</c:forEach>
 								</c:when>
