@@ -1,11 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/include/user-header.jspf"%>
 <link href="/resources/css/board_comm/board_comm_modify.css" rel="stylesheet">
 <script src="/resources/js/board_comm/board_comm.js"></script>
 
-
 <style>
-
+ 
 .title1{
 margin-top: 10px;
 margin-left: 10px;
@@ -15,7 +13,7 @@ border-radius: 2em 2em 2em 2em;
 padding: 6px;
 font-size: 15px;
 }
-.title2{
+.title2{ 
 margin-top: 15px;
 font-size: 13px;
 
