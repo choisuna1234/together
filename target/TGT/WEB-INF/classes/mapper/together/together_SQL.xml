@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="together">
+
+	<!-- 23.01.12 박선영: 함께해요 게시판 리스트 출력 및 검색  -->
+	<select id="togetherList" resultType="hashmap">
+		<!-- <include refid = "common.pagingPre"/> -->
+		<![CDATA[
+			select 
+				t.to_idx,
+				t.to_title,
+				t.to_tc_name,
+				t.to_contents,
+				t.to_writer_id,
+				t.to_writer_name,
+				t.to_date,
+				t.to_time,
+				t.to_people,
+				t.to_join_people,
+				t.to_loc,
+				t.to_br_name,
+				t.to_wt_idx,
+				t.to_reg_date,
+				t.to_mod_date,
+				t.to_del_gb,
+				c.tc_idx,
+				c.tc_name,
+				c.tc_count 
+				from together t, together_cate c
+				where t.to_tc_name = c.tc_name
+		]]>
+		<if test="keyword != null">
+			<choose>
+				<when test="searchType == 'T'.toString()">
+					AND (to_title like '%' || #{keyword} || '%')
+				</when>
+				<when test="searchType == 'C'.toString()">
+					AND (to_tc_name like '%' || #{keyword} || '%')
+				</when>
+				<when test="searchType == 'B'.toString()">
+					AND (to_br_name like '%' || #{keyword} || '%')
+				</when>
+				<otherwise>
+					AND ((to_wt_idx like '%' || #{keyword} || '%') OR (to_contents like '%' || #{keyword} || '%'))
+				</otherwise>
+			</choose>
+		</if>
+		<!-- <include refid="common.pagingPost"/> -->
+	</select>
+	
+	
+	
+	<!-- 23.01.13 박선영: 게시글 작성폼  -->
+	<insert id="togetherWrite" parameterType="hashmap">
+		<![CDATA[
+			insert into TOGETHER(
+				TO_IDX,
+				TO_TITLE,
+				TO_TC_NAME,
+				TO_CONTENTS,
+				TO_DATE,
+				TO_TIME,
+				TO_PEOPLE,
+				TO_LOC,
+				TO_BR_NAME,
+				TO_WT_IDX,
+				TO_REG_DATE,
+				TO_MOD_DATE,
+				TO_DEL_GB
+				) 
+				VALUES(
+				seq_together.nextval, 
+				#{TO_TITLE, jdbcType=VARCHAR},
+				#{TO_TC_NAME, jdbcType=VARCHAR},
+				#{TO_CONTENTS, jdbcType=VARCHAR},
+				#{TO_DATE, jdbcType=VARCHAR},
+				#{TO_TIME, jdbcType=VARCHAR},
+				#{TO_PEOPLE, jdbcType=VARCHAR},
+				#{TO_LOC, jdbcType=VARCHAR},
+				#{TO_BR_NAME, jdbcType=VARCHAR},
+				#{TO_WT_IDX, jdbcType=VARCHAR},
+				sysdate,
+				sysdate,
+				'N'
+				)
+		]]>
+	</insert>
+	
+	<!-- 23.01.18 박선영: 함께해요 게시글 상세보기 -->
+	<select id="togetherDetail" resultType="hashmap">
+		<![CDATA[
+			SELECT t.TO_IDX,
+					t.TO_TITLE,
+					t.TO_TC_NAME,
+					t.TO_CONTENTS,
+					t.TO_WRITER_ID,
+					t.TO_WRITER_NAME,
+					t.TO_DATE,
+					t.TO_TIME,
+					t.TO_PEOPLE,
+					t.TO_JOIN_PEOPLE,
+					t.TO_LOC,
+					t.TO_BR_NAME,
+					t.TO_WT_IDX,
+					t.TO_REG_DATE,
+					t.TO_MOD_DATE,
+					t.TO_DEL_GB,
+					c.TC_IDX,
+					c.TC_NAME,
+					c.TC_COUNT,
+					w.TW_IDX,
+					w.TW_TO_IDX,
+					w.TW_MEM_ID
+					FROM TOGETHER t, TOGETHER_CATE c, TOGETHER_WITH w
+					WHERE t.TO_TC_NAME = c.TC_NAME
+					AND t.TO_IDX = w.TW_TO_IDX
+					AND t.TO_IDX=#{TO_IDX}
+		]]>
+	</select>
+	
+	<!-- 23.01.19 박선영 함께해요 카테고리별 리스트 출력 -->
+	<select id="togetherCateList" resultType="hashmap">
+		<![CDATA[
+			SELECT
+				t.TO_IDX,
+				t.TO_TITLE,
+				t.TO_TC_NAME,
+				t.TO_CONTENTS,
+				t.TO_WRITER_ID,
+				t.TO_WRITER_NAME,
+				t.TO_DATE,
+				t.TO_TIME,
+				t.TO_PEOPLE,
+				t.TO_JOIN_PEOPLE,
+				t.TO_LOC,
+				t.TO_BR_NAME,
+				t.TO_WT_IDX,
+				t.TO_REG_DATE,
+				t.TO_MOD_DATE,
+				t.TO_DEL_GB,
+				c.TC_IDX,
+				c.TC_NAME,
+				c.TC_COUNT 
+				from TOGETHER t, TOGETHER_CATE c
+				where t.TO_TC_NAME = c.TC_NAME
+				AND c.TC_NAME=#{TC_NAME}
+		]]>
+	</select>
+	
+</mapper>

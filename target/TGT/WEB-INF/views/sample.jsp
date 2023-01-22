@@ -94,7 +94,10 @@
 	<a class="btn fa" href="#"><i class="fa-regular fa-heart"></i></a>
 	<hr>
 	
-	<h4>체크박스</h4> <input type="checkbox" name="check_test" value="a" checked><input type="checkbox" name="check_test" value="b"><input type="checkbox" name="check_test" value="c">
+	<h4>체크박스</h4> 
+		<input type="checkbox" name="check_test" value="a" checked>
+		<input type="checkbox" name="check_test" value="b">
+		<input type="checkbox" name="check_test" value="c">
 	<hr>
 	
 	<h4>라디오 버튼 클래스</h4>
@@ -223,7 +226,5 @@
 	</c:if>
 </main><!-- //main 종료 -->
 
-<c:if test="${page != 'admin'}">
-	<!-- 풋터. 모든 페이지에 삽입! -->
-	<%@ include file="/WEB-INF/include/common-footer.jspf" %>
-</c:if>
+<!-- 풋터. 모든 페이지에 삽입! -->
+<%@ include file="/WEB-INF/include/common-footer.jspf" %>
