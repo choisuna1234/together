@@ -33,70 +33,8 @@ $(function() {
 		toastr.info('${error}');
 	}
 });
-	
-	/*  $(function(){
-	    $('#tab_b').on('click',reqAjax1);
-	    
-	})
-	
-	function reqAjax1() {
-	    $.ajax({
-	        url: "/board/list.paw?BC_BCC_NAME="+BC_BCC_NAME
-	        , method : 'GET'
-	        , success :  function(data) {
-				$('#BC_BCC_NAME').html(data);
-				
-			},
-			error: function(request, status, error) {
-				alert(error);
-			}
-	    })
-	} */
- 
-	
-	/*  function refreshList(){
-		$("#BC_BCC_NAME").on("change", function(){
-			var BC_BCC_NAME = $(this).val();
-			location.href="/board/list.paw?BC_BCC_NAME="+BC_BCC_NAME;
-		})
-	}  */
-	
-	
-	 
-	
-	 
-	/* $(function(){
-	    
-	    $("input:radio[name='BC_BCC_NAME']").on('click',function(){
-	        
-	    	var kind = $(this).val();
-	    	
-	        $.ajax({
-	            
-	            url : "/board/list.paw?BC_BCC_NAME="+BC_BCC_NAME
-	           
-	            data : {
-	            	
-	                 id : $(this).val(),
-	                "kind":kind    
-	            },
-	            success : function(data){
-	                console.log(data);
-	                $('body').html(data); 
-	            },
-	            error : function(data){
-	                alert('error');
-	            }
-	        })
-	    });
-	    
-	});  */
-	
-/*	$(function refreshList() {
-		$("radio").on("click", getData);
-	});*/
 
-	var path = "${pageContext.request.contextPath }";
+
 
 $(function(){
 
@@ -174,23 +112,6 @@ $(function(){
 									<input type="radio" id="f" name="BC_BCC_NAME" value="자원봉사구해요" ><label for="f">자원봉사구해요</label>
 								</div>
 							<br>
-								<!-- <th width="5%">NO.</th>
-								<th width="15%">
-
-										<select name="BC_BCC_NAME" class="BC_BCC_NAME"
-											id="BC_BCC_NAME" style="height: 30px;" onchange="refreshList()">
-											<option value="전체게시판">전체게시판</option>
-											<option value="자유게시판">자유게시판</option>
-											<option value="정보게시판">정보게시판</option>
-											<option value="긴급실종유기견">긴급실종유기견</option>
-											<option value="자원봉사구해요">자원봉사구해요</option>
-										</select>
-								</th>
-
-								<th width="45%">제목</th>
-								<th width="5%">조회수</th>
-								<th width="10%">작성자</th>
-								<th width="10%">작성일</th> -->
 							</div>
 						</thead>
 						<tbody>
