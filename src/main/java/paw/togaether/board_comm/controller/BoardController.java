@@ -139,12 +139,22 @@ public class BoardController {
 		return mv;
 	}
 	
-	// 멍멍왈왈 게시판 댓글 등록
+	// 댓글 등록
 	@RequestMapping(value = "/comment/write", method = RequestMethod.POST)
 	public ModelAndView commentInsert(CommandMap commandMap, RedirectAttributes redirect) throws Exception {
 		ModelAndView mv = new ModelAndView("board_comm/board_detail");
 		
 		boardService.commentInsert(commandMap.getMap());
+		
+		return mv;
+	}
+	
+	//댓글 삭제
+	@RequestMapping(value = "/comment/delete", method = RequestMethod.POST )
+	public ModelAndView commentDelete(CommandMap commandMap, RedirectAttributes redirect) throws Exception {
+		
+		ModelAndView mv = new ModelAndView("redirect:/board/detail.paw");
+		boardService.commentDelete(commandMap.getMap());
 		
 		return mv;
 	}

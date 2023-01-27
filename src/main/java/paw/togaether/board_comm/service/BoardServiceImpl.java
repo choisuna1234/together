@@ -65,6 +65,12 @@ public class BoardServiceImpl implements BoardService {
 	public List<Map<String, Object>> commentList(Map<String, Object> map) throws Exception {
 		return boardDAO.commentList(map);
 	}
-		
+	
+	//댓글 삭제
+	@Override
+	public void commentDelete(Map<String ,Object> map) throws Exception {
+		boardDAO.commentDelete(map);
+	}
+	
 	
 }

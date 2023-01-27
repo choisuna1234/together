@@ -46,6 +46,7 @@ function ComAjax(opt_formId){
 		$("#commonForm").empty();
 	}
 	
+	
 	this.setUrl = function setUrl(url){
 		this.url = url;
 	};
@@ -100,7 +101,7 @@ function gfn_renderPaging(params){
 	
 	var recordCount = params.recordCount; //페이지당 레코드 수
 	if(gfn_isNull(recordCount) == true){
-		recordCount = 10;
+//		recordCount = 10;
 	}
 	var totalIndexCount = Math.ceil(totalCount / recordCount); // 전체 인덱스 수
 	gfv_eventName = params.eventName;

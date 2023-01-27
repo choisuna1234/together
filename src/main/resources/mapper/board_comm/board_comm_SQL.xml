@@ -7,7 +7,9 @@
 23.01.12 최선아: 멍멍왈왈 게시판 리스트 출력 및 등록 
 23.01.13 최선아: 멍멍왈왈 게시판 수정
 23.01.18 최선아: 멍멍왈왈 게시판 카테고리 설정 
-23.01.25 최선아: 게시판 댓글 처리
+23.01.25 최선아: 게시판 댓글 등록, 조회
+23.01.27 최선아: 게시판 댓글 수정, 삭제
+
 -->
 
 <!-- 게시판 리스트 -->
@@ -139,7 +141,6 @@
 </insert>
 
 <!-- 댓글 조회 -->
-
 <select id="commentList" parameterType="hashmap" resultType="hashmap" >
 	<![CDATA[
 		SELECT
@@ -151,8 +152,25 @@
 			BOARD_COMMENT
 		WHERE
 			BNO = #{BC_IDX, jdbcType=VARCHAR}
+			AND  COM_DEL_GB = 'N'
+			
 	]]>
 </select>
+
+
+<!-- 댓글 삭제 -->
+<update id="commentDelete" parameterType="hashmap">
+	<![CDATA[
+	DELETE 
+		BOARD_COMMENT
+	SET
+		 COM_DEL_GB = 'Y'
+	WHERE 
+		BNO = #{BC_IDX, jdbcType=VARCHAR} 
+	]]>
+</update>
+
+
 
 
 

@@ -2,26 +2,26 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <%@ include file="/WEB-INF/include/common-head.jspf" %>
-<script src="/resources/js/paging/paging.js"></script>
+<script src="/resources/js/paging/searchPaging_T.js"></script>
 
-			<div >
-					<table class="card_table" id="together_list">
-						<thead>
-							<tr>
-								<th scope="col">제목 [지역]</th>
-								<th scope="col">내용</th>
-								<th scope="col">작성자</th>
-								<th scope="col">작성일</th>
-							</tr>
-						</thead>
-						<tbody class="together">
-	
-						</tbody>
-					</table>
-			</div>
+	<div>
+			<table class="card_table" id="together_list">
+				<thead>
+					<tr>
+						<th scope="col">제목 [지역]</th>
+						<th scope="col">내용</th>
+						<th scope="col">작성자</th>
+						<th scope="col">작성일</th>
+					</tr>
+				</thead>
+				<tbody class="together">
 
-			<div id="PAGE_NAVI_T"></div>
-			<input type="hidden" id="PAGE_INDEX" name="PAGE_INDEX" /> <br />
+				</tbody>
+			</table>
+	</div>
+
+	<div id="PAGE_NAVI_T"></div>
+	<input type="hidden" id="PAGE_INDEX_T" name="PAGE_INDEX_T" /> <br />
 
 		<form id="commonForm" name="commonForm"></form>
 <!-- <script type="text/javascript" src="/resources/js/main/search_together.js"></script> -->
@@ -37,11 +37,10 @@
 
 		function fn_selectBoardList2(pageNo) {
 			var comAjax = new ComAjax();
-
 			comAjax.setUrl("<c:url value='/paging/together.paw' />");
 			comAjax.setCallback("fn_selectBoardListCallback2");
-
-			comAjax.addParam("PAGE_INDEX", pageNo);
+			
+			comAjax.addParam("PAGE_INDEX", $("#PAGE_INDEX_T").val());
 			comAjax.addParam("PAGE_ROW", 6);
 
 			comAjax.addParam("keyword", $('#keyword').val());
@@ -52,7 +51,8 @@
 		
 
 		function fn_selectBoardListCallback2(data) {
-			var total2 = data.TOTAL;
+			var total2 = data.TOTAL_T;
+			
 			var body = $(".together");
 			body.empty();
 			
@@ -64,11 +64,11 @@
 			} else {
 				var params2 = {
 					divId : "PAGE_NAVI_T",
-					pageIndex : "PAGE_INDEX",
+					pageIndex : "PAGE_INDEX_T",
 					totalCount : total2,
-					eventName : "fn_selectBoardList2"
+					eventName : "fn_selectBoardList2",
 				};
-				gfn_renderPaging(params2);
+				gfn_renderPaging_T(params2);
 
 				var str = "";
 				$.each(data.togetherSearchList,

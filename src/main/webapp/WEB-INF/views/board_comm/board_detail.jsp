@@ -14,75 +14,48 @@ margin-bottom: 10px;
 color: black;
 background-color: #f6eeec;
 border-radius: 2em 2em 2em 2em;
-  padding: 6px;
+padding: 6px;
 }  
 .title2{
 margin-top: 4px;
 }
 </style>
-<script>
 
+<script>
+$(function(){
+	
 $('#btn').click(function() {
 	
 	const BNO = ${map.BC_IDX};
-	
 	const CONTENT = $('#CONTENT').val();
 	
 	console.log(BNO);
-	
 	console.log(CONTENT);
 	
-	
-	/* $form=$(this).closest("form[name='board_comment']");
-	
-	$.ajax({
-		url:"<c:url value='/comment/write'/>"
-		,type : "POST"
-		,dataType :"data"
-		,data : $form.serialize()
-		,success: function(data){
-			console.log(data);
-			$form.find("textarea[name='CONTENT']").val('');
-			$("#comment-table").html('');
-			comment-table();
-		}
-		error: function (data) {
-			alert('error');
-		} */
-		
-
 			$.ajax({
 				type:'post',
-				url:'<c:url value="/comment/write"/>',
-				data: JSON.stringify(
+				url: "/comment/write.paw",
+				data: 
 					{
 						"BNO":BNO,
-						
 						"CONTENT":CONTENT
-					}		
-				),
-				contentType: 'application/json',
-				success:function(data){
-					console.log('통신성공' + data);
-					if(data === 'InsertSuccess') {
-						alert('댓글 등록이 완료되었습니다.');
-						console.log('댓글 등록 완료');
-	   					$('#CONTENT').val('');
-	   					getList();
-					} else {
-						console.log('댓글 등록 실패');
-					}
+					},		
+				
+				dataType: "text",
+				success: function (data) {
+					$("CONTENT").html(data);
+					$("BNO").html(data);
+					location.reload();
 				},
-				error:function(){
-					alert('통신실패');
+				error:function(data){
+					alert('댓글 작성 실패');
 				}
-		
-		
 		});
-/* 	});//ajax */ 
-});//등록버튼
-</script>
+	});
+	
+});
 
+</script>
 <main class="layoutCenter">
 		<section class="notice">
 			<div class="page-title">
@@ -132,19 +105,27 @@ $('#btn').click(function() {
 					</div>
 					<br>
 					<br>
-					
 					<!-- 댓글 목록 -->
 					<i class="fa-solid fa-comments">댓글</i>
+					<br>
 				<table class="comment-table" id="comment-table">
 						<tbody>
 							<c:choose>
 								<c:when test="${fn:length(comment) > 0}">
 									<c:forEach items="${comment}" var="comment">
-										<tr align="center">
-												<td >${comment.WRITER }</td>
-												<td >${comment.CONTENT }</td>
-												<td >${comment.REGDATE}</td>
-											
+										<tr>
+												<td width="82%">
+												<i class="fa-solid fa-user-large" style="font-size: 14px;"> &nbsp; ${comment.WRITER } </i>
+												<br>
+												${comment.CONTENT }
+												<br>
+												</td>
+												<td width="18%" style="font-size: 14px;">
+												<fmt:formatDate 
+													value="${comment.REGDATE}" pattern="yyyy-MM-dd" />
+												<button class="btn slim" id="commentDelete" name="commentDelete">삭제</button>
+												<button class="btn slim" id="commentModify" name="commentModify">수정</button>
+												</td>
 										</tr>
 									</c:forEach>
 								</c:when>
@@ -157,26 +138,13 @@ $('#btn').click(function() {
 						</tbody>
 						</table>
 						<br>
-						
-				 
-				<!-- <form id="board_comment" name="board_comment" method="post" action="/comment/write.paw"> -->
-				
-					<input type="hidden" name="BNO" id="BNO" value="${map.BC_IDX}" />
-						<textarea placeholder="댓글을 입력해주세요." name="CONTENT" id="CONTENT" style="width:1300px;height:100px;"></textarea>
-						
-						<br>
-						<%-- <a class="use_move btn warn" href="/board/detail.paw" onclick="move(this,'BNO:${map.BC_IDX}');">댓글작성</a> --%>
-						<!-- <button class="btn" id="btn" type="submit" style="float:right;">댓글 작성</button> -->
-						<button id="btn">댓글 작성</button>
-				<!-- </form> -->
+							<input type="hidden" name="BNO" id="BNO" value="${map.BC_IDX}" />
+							<textarea placeholder="댓글을 입력해주세요." name="CONTENT" id="CONTENT" style="width:1300px;height:100px;"></textarea>
+								<br>
+								<br>
+				 					<button class="btn submit" id="btn" name="btn" style="float:right">댓글 작성</button>
 				</div>
 			</div>
-					</section>	
-
-
-
-
-
-
-
+		</section>	
+</main>
 </html>

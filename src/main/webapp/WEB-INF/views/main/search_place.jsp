@@ -2,26 +2,26 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <%@ include file="/WEB-INF/include/common-head.jspf" %>
-<script src="/resources/js/paging/paging.js"></script>
+<script src="/resources/js/paging/searchPaging_P.js"></script>
 
-		<div >
-				<table class="card_table" id="place_list">
-					<thead>
-						<tr >
-							<th scope="col">제목 [지역]</th>
-							<th scope="col">내용</th>
-							<th scope="col">작성자</th>
-							<th scope="col">작성일</th>
-						</tr>
-					</thead>
-					<tbody class="place">
-	
-					</tbody>
-				</table>
-		</div>
+	<div>
+			<table class="card_table" id="place_list">
+				<thead>
+					<tr >
+						<th scope="col">제목 [지역]</th>
+						<th scope="col">내용</th>
+						<th scope="col">작성자</th>
+						<th scope="col">작성일</th>
+					</tr>
+				</thead>
+				<tbody class="place">
+
+				</tbody>
+			</table>
+	</div>
 
 		<div id="PAGE_NAVI_P"></div>
-		<input type="hidden" id="PAGE_INDEX" name="PAGE_INDEX" /> <br />
+		<input type="hidden" id="PAGE_INDEX_P" name="PAGE_INDEX_P" /> <br />
 
 	<form id="commonForm" name="commonForm"></form>
 <script type="text/javascript">
@@ -39,7 +39,7 @@ $(document).ready(function(){
 		comAjax.setUrl("<c:url value='/paging/place.paw' />");
 		comAjax.setCallback("fn_selectPlaceListCallback3");
 
-		comAjax.addParam("PAGE_INDEX", pageNo);
+		comAjax.addParam("PAGE_INDEX", $("#PAGE_INDEX_P").val());
 		comAjax.addParam("PAGE_ROW", 6);
 
 		comAjax.addParam("keyword", $('#keyword').val());
@@ -50,7 +50,7 @@ $(document).ready(function(){
 	
 
 	function fn_selectPlaceListCallback3(data) {
-		var total3 = data.TOTAL;
+		var total3 = data.TOTAL_P;
 		var body = $(".place");
 		body.empty();
 		
@@ -61,11 +61,11 @@ $(document).ready(function(){
 		} else {
 			var params3 = {
 				divId : "PAGE_NAVI_P",
-				pageIndex : "PAGE_INDEX",
+				pageIndex : "PAGE_INDEX_P",
 				totalCount : total3,
-				eventName : "fn_selectPlaceList3"
+				eventName : "fn_selectPlaceList3",
 			};
-			gfn_renderPaging(params3);
+			gfn_renderPaging_P(params3);
 
 			var str = "";
 			$.each(data.placeSearchList,

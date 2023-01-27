@@ -59,4 +59,11 @@ public class BoardDAO extends AbstractDAO {
 		return (List<Map<String, Object>>) selectList("Board.commentList", map);
 	}
 	
+	// 댓글 삭제
+	public void commentDelete(Map<String, Object> map) throws Exception {
+		update("Board.commentDelete", map);
+	}
+		
+		
+	
 }
