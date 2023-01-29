@@ -21,41 +21,7 @@ margin-top: 4px;
 }
 </style>
 
-<script>
-$(function(){
-	
-$('#btn').click(function() {
-	
-	const BNO = ${map.BC_IDX};
-	const CONTENT = $('#CONTENT').val();
-	
-	console.log(BNO);
-	console.log(CONTENT);
-	
-			$.ajax({
-				type:'post',
-				url: "/comment/write.paw",
-				data: 
-					{
-						"BNO":BNO,
-						"CONTENT":CONTENT
-					},		
-				
-				dataType: "text",
-				success: function (data) {
-					$("CONTENT").html(data);
-					$("BNO").html(data);
-					location.reload();
-				},
-				error:function(data){
-					alert('댓글 작성 실패');
-				}
-		});
-	});
-	
-});
 
-</script>
 <main class="layoutCenter">
 		<section class="notice">
 			<div class="page-title">
@@ -113,20 +79,28 @@ $('#btn').click(function() {
 							<c:choose>
 								<c:when test="${fn:length(comment) > 0}">
 									<c:forEach items="${comment}" var="comment">
+										<div class="row">
 										<tr>
-												<td width="82%">
-												<i class="fa-solid fa-user-large" style="font-size: 14px;"> &nbsp; ${comment.WRITER } </i>
+										
+												<td width="70%">
+													<input type="text" name="RNO" id="RNO_val" value="${comment.RNO }">
+
+												<i class="fa-solid fa-user-large" style="font-size: 14px;"> &nbsp; ${comment.WRITER }</i>
 												<br>
 												${comment.CONTENT }
 												<br>
 												</td>
-												<td width="18%" style="font-size: 14px;">
+												<td width="30%" style="font-size: 14px;">
 												<fmt:formatDate 
 													value="${comment.REGDATE}" pattern="yyyy-MM-dd" />
-												<button class="btn slim" id="commentDelete" name="commentDelete">삭제</button>
+													<button onclick="cmUpdateFun(${comment.RNO})">수정하기</button>
+													<button onclick="cmDeleteFun(${comment.RNO})">삭제하기</button>
+
+													
 												<button class="btn slim" id="commentModify" name="commentModify">수정</button>
 												</td>
 										</tr>
+										</div>
 									</c:forEach>
 								</c:when>
 								<c:otherwise>
@@ -138,6 +112,7 @@ $('#btn').click(function() {
 						</tbody>
 						</table>
 						<br>
+						
 							<input type="hidden" name="BNO" id="BNO" value="${map.BC_IDX}" />
 							<textarea placeholder="댓글을 입력해주세요." name="CONTENT" id="CONTENT" style="width:1300px;height:100px;"></textarea>
 								<br>
@@ -147,4 +122,87 @@ $('#btn').click(function() {
 			</div>
 		</section>	
 </main>
+<script>
+$(function(){
+	
+$('#btn').click(function() {
+	
+	const BNO = ${map.BC_IDX};
+	const CONTENT = $('#CONTENT').val();
+	
+	console.log(BNO);
+	console.log(CONTENT);
+	
+			$.ajax({
+				type:'post',
+				url: "/comment/write.paw",
+				data: 
+					{
+						"BNO":BNO,
+						"CONTENT":CONTENT
+					},		
+				dataType: "text",
+				success: function (data) {
+					$("CONTENT").html(data);
+					$("BNO").html(data);
+					location.reload();
+				},
+				error:function(data){
+					alert('댓글 작성 실패');
+				}
+		});
+	});
+
+
+});
+
+function cmUpdateFun(rno){
+
+	alert(rno);
+	$.ajax({
+		type:'post',
+		url: "/comment/update.paw",
+		data:
+				{
+					"RNO":rno,
+				},
+		dataType: "text",
+		success: function (data) {
+
+			location.reload();
+		},
+		error:function(data){
+			alert('댓글 수정 실패');
+		}
+	});
+
+}
+function cmDeleteFun(rno){
+
+	alert(rno);
+	const BNO = ${map.BC_IDX};
+
+	$.ajax({
+		type:'post',
+		url: "/comment/delete.paw",
+		data:
+				{
+					"RNO":rno,
+					"BNO":BNO
+				},
+		dataType: "text",
+		success: function (data) {
+
+			location.reload();
+		},
+		error:function(data){
+			alert('댓글 삭제 실패');
+		}
+	});
+
+}
+
+
+</script>
 </html>
+

@@ -93,13 +93,14 @@
 
 
 <!-- 게시글 수정하기 -->
- <update id="boardModify" parameterType="hashmap">
+<update id="boardModify" parameterType="hashmap">
 	<![CDATA[
 		UPDATE
 			BOARD_COMM
 		SET
 			BC_TITLE = #{BC_TITLE},
-			BC_CONTENTS = #{BC_CONTENTS}
+			BC_CONTENTS = #{BC_CONTENTS},
+			BC_BCC_NAME = #{BC_BCC_NAME}
 		WHERE
 			BC_IDX = #{BC_IDX, jdbcType=VARCHAR}
 	]]>
@@ -147,7 +148,8 @@
 			BNO,
 			WRITER,
 			CONTENT,
-			REGDATE
+			REGDATE,
+			RNO
 		FROM
 			BOARD_COMMENT
 		WHERE
@@ -161,12 +163,12 @@
 <!-- 댓글 삭제 -->
 <update id="commentDelete" parameterType="hashmap">
 	<![CDATA[
-	DELETE 
+	UPDATE 
 		BOARD_COMMENT
 	SET
 		 COM_DEL_GB = 'Y'
 	WHERE 
-		BNO = #{BC_IDX, jdbcType=VARCHAR} 
+		RNO = #{RNO, jdbcType=VARCHAR} 
 	]]>
 </update>
 

@@ -153,7 +153,7 @@ public class BoardController {
 	@RequestMapping(value = "/comment/delete", method = RequestMethod.POST )
 	public ModelAndView commentDelete(CommandMap commandMap, RedirectAttributes redirect) throws Exception {
 		
-		ModelAndView mv = new ModelAndView("redirect:/board/detail.paw");
+		ModelAndView mv = new ModelAndView("board_comm/board_detail");
 		boardService.commentDelete(commandMap.getMap());
 		
 		return mv;
