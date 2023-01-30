@@ -8,8 +8,8 @@
 23.01.13 최선아: 멍멍왈왈 게시판 수정
 23.01.18 최선아: 멍멍왈왈 게시판 카테고리 설정 
 23.01.25 최선아: 게시판 댓글 등록, 조회
-23.01.27 최선아: 게시판 댓글 수정, 삭제
-
+23.01.27 최선아: 게시판 댓글 삭제
+23.01.30 최선아: 게시판 댓글 수정
 -->
 
 <!-- 게시판 리스트 -->
@@ -172,6 +172,18 @@
 	]]>
 </update>
 
+
+<!-- 댓글 수정하기 -->
+<update id="commentModify" parameterType="hashmap">
+	<![CDATA[
+		UPDATE
+			BOARD_COMMENT
+		SET
+			CONTENT = #{CONTENT}
+		WHERE
+			RNO = #{RNO, jdbcType=VARCHAR}
+	]]>
+</update> 
 
 
 

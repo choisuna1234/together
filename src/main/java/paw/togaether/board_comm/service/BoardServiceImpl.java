@@ -72,5 +72,10 @@ public class BoardServiceImpl implements BoardService {
 		boardDAO.commentDelete(map);
 	}
 	
+	// 멍멍왈왈 수정하기
+	@Override
+	public void commentModify(Map<String, Object> map) throws Exception {
+		boardDAO.commentModify(map);
+	}
 	
 }

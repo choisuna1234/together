@@ -34,7 +34,9 @@ public class BoardController {
 	 * 23.01.16 최선아: 멍멍왈왈 게시판 삭제
 	 * 23.01.17 최선아: 멍멍왈왈 게시판 등록 후 알러창 띄우기
 	 * 23.01.19 최선아: 멍멍왈왈 게시판 카테고리
-	 * 23.01.25 최선아: 멍멍왈왈 댓글처리
+	 * 23.01.25 최선아: 멍멍왈왈 댓글 등록, 조회
+	 * 23.01.27 최선아: 게시판 댓글 삭제
+	 * 23.01.30 최선아: 게시판 댓글 수정
 	 * */
 	
 	
@@ -155,11 +157,21 @@ public class BoardController {
 		
 		ModelAndView mv = new ModelAndView("board_comm/board_detail");
 		boardService.commentDelete(commandMap.getMap());
+		redirect.addFlashAttribute("info", "댓글 삭제가 완료되었습니다.");
 		
 		return mv;
 	}
 	
 	
+	// 게시글 수정하기
+	@RequestMapping(value = "/comment/modify", method = RequestMethod.POST) 
+	public ModelAndView commentModify(CommandMap commandMap, RedirectAttributes redirect) throws Exception {
+		ModelAndView mv = new ModelAndView("redirect:/board/detail.paw");
+
+		boardService.commentModify(commandMap.getMap());
+		log.info("getmap()"+commandMap.getMap());
+		return mv;
+	}
 	
 	
 }

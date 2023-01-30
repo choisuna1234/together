@@ -71,19 +71,20 @@ margin-top: 4px;
 					</div>
 					<br>
 					<br>
-					<!-- 댓글 목록 -->
+					
+					<!-- -----------------------------댓글 목록----------------------------------------- -->
 					<i class="fa-solid fa-comments">댓글</i>
 					<br>
 				<table class="comment-table" id="comment-table">
 						<tbody>
 							<c:choose>
 								<c:when test="${fn:length(comment) > 0}">
-									<c:forEach items="${comment}" var="comment">
+									<c:forEach items="${comment}" var="comment" varStatus="i" >
 										<div class="row">
 										<tr>
 										
 												<td width="70%">
-													<input type="text" name="RNO" id="RNO_val" value="${comment.RNO }">
+													<input type="hidden" name="RNO" id="RNO_val" value="${comment.RNO }">
 
 												<i class="fa-solid fa-user-large" style="font-size: 14px;"> &nbsp; ${comment.WRITER }</i>
 												<br>
@@ -93,15 +94,24 @@ margin-top: 4px;
 												<td width="30%" style="font-size: 14px;">
 												<fmt:formatDate 
 													value="${comment.REGDATE}" pattern="yyyy-MM-dd" />
-													<button onclick="cmUpdateFun(${comment.RNO})">수정하기</button>
+													<button type="button" onclick="modifyView(this.id)" id="modify${i.count }">
+													<%-- <button onclick="cmUpdateFun(${comment.RNO})"> --%>수정하기</button>
 													<button onclick="cmDeleteFun(${comment.RNO})">삭제하기</button>
-
-													
-												<button class="btn slim" id="commentModify" name="commentModify">수정</button>
 												</td>
 										</tr>
 										</div>
-									</c:forEach>
+				<tr class="modifyViews">
+				<form action="/comment/modify.paw" method="post">
+					<td>
+						 <textarea style="width:1000px; height:100px;" placeholder="내용을 작성하세요" name="CONTENT" required="required"> ${comment.CONTENT}</textarea>
+						 </td>
+						 
+					<td>
+						<button>수정</button>
+					</td>
+				</form>
+			</tr>
+								</c:forEach>
 								</c:when>
 								<c:otherwise>
 									<tr>
@@ -112,7 +122,6 @@ margin-top: 4px;
 						</tbody>
 						</table>
 						<br>
-						
 							<input type="hidden" name="BNO" id="BNO" value="${map.BC_IDX}" />
 							<textarea placeholder="댓글을 입력해주세요." name="CONTENT" id="CONTENT" style="width:1300px;height:100px;"></textarea>
 								<br>
@@ -153,8 +162,24 @@ $('#btn').click(function() {
 		});
 	});
 
-
 });
+
+
+var modifyViews = document.getElementsByClassName('modifyViews')
+
+for (var i = 0; i < modifyViews.length; i++) {
+	modifyViews[i].style.display = 'none'
+}
+
+function modifyView(idI) {
+	var modifiId = document.getElementById(idI);
+	
+	alert(idI);
+	modifiId.parentElement.parentElement.style.display = 'none';
+	modifiId.parentElement.parentElement.nextElementSibling.style.display = '';
+
+}
+
 
 function cmUpdateFun(rno){
 
@@ -201,7 +226,6 @@ function cmDeleteFun(rno){
 	});
 
 }
-
 
 </script>
 </html>

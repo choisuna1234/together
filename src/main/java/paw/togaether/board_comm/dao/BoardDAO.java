@@ -64,6 +64,11 @@ public class BoardDAO extends AbstractDAO {
 		update("Board.commentDelete", map);
 	}
 		
-		
+	// 멍멍왈왈 수정하기
+	public void commentModify(Map<String, Object> map) throws Exception {
+		update("Board.commentModify", map);
+	}
+	
+	
 	
 }

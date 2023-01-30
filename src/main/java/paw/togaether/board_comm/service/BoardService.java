@@ -32,4 +32,6 @@ public interface BoardService {
 	//댓글삭제
 	void commentDelete(Map<String, Object> map) throws Exception;
 	
+	//댓글 수정
+	void commentModify(Map<String, Object> map) throws Exception;
 }
