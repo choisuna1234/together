@@ -167,9 +167,11 @@ public class BoardController {
 	@RequestMapping(value = "/comment/modify", method = RequestMethod.POST) 
 	public ModelAndView commentModify(CommandMap commandMap, RedirectAttributes redirect) throws Exception {
 		ModelAndView mv = new ModelAndView("redirect:/board/detail.paw");
-
+		System.out.println("aaaaaaa : " + commandMap.getMap());
+		
 		boardService.commentModify(commandMap.getMap());
-		log.info("getmap()"+commandMap.getMap());
+		redirect.addAttribute("BC_IDX", commandMap.get("BC_IDX"));
+		//log.info("getmap()"+commandMap.getMap());
 		return mv;
 	}
 	
