@@ -23,7 +23,7 @@
 					<input type="text" class="txt" placeholder="Search" name="keyword" id="keyword" value="${keyword}" width="150"/>&nbsp; 
 					<input type="submit" value="검색" class="btn submit" />
 				</div>
-			</form>
+			</form> 	
 		</div>
 			<div>
 				<div class="tab_radio">

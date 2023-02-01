@@ -13,7 +13,8 @@ public class BoardDAO extends AbstractDAO {
 	// 멍멍왈왈 게시판 리스트 띄우기
 	@SuppressWarnings("unchecked")
 	public List<Map<String, Object>> boardList(Map<String, Object> map) throws Exception {
-		return (List<Map<String, Object>>) selectList("Board.boardList", map);
+		return (List<Map<String, Object>>) selectPagingList("Board.boardList", map);
+		
 	}
 	
 	//멍멍왈왈 게시판 글쓰기
