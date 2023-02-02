@@ -55,39 +55,34 @@ public class BoardController {
 		return mv;
 	}
 
-	// 멍멍왈왈 게시판 리스트
-	@RequestMapping(value = "/board/list2.paw", method=RequestMethod.POST)
-	public ModelAndView boardList2(CommandMap commandMap) throws Exception {
-		ModelAndView mv = new ModelAndView("board_comm/board_list2");
-		Map<String, Object> map = commandMap.getMap();
-		if (map.get("BC_BCC_NAME").equals("전체게시판")){
-			map.remove("BC_BCC_NAME");
-		};
-		List<Map<String, Object>> list = boardService.boardList(commandMap.getMap());
-		log.info("BoadList2=============="+map);
-		mv.addObject("list", list); //글번호,제목,조회수,작성자,작성날짜 담아줌
-		
+	/*
+	 * // 멍멍왈왈 게시판 리스트
+	 * 
+	 * @RequestMapping(value = "/board/list2.paw", method=RequestMethod.POST) public
+	 * ModelAndView boardList2(CommandMap commandMap) throws Exception {
+	 * ModelAndView mv = new ModelAndView("board_comm/board_list2"); Map<String,
+	 * Object> map = commandMap.getMap(); if
+	 * (map.get("BC_BCC_NAME").equals("전체게시판")){ map.remove("BC_BCC_NAME"); };
+	 * List<Map<String, Object>> list = boardService.boardList(commandMap.getMap());
+	 * log.info("BoadList2=============="+map); mv.addObject("list", list);
+	 * //글번호,제목,조회수,작성자,작성날짜 담아줌
+	 * 
+	 * return mv; }
+	 */
 
-		return mv;
-	}
-
-	//페이징 처리 위한 jsonview
-	@RequestMapping(value="/board/list")
+	//페이징 리스트
+	@RequestMapping(value="/pagingBoard/list")
 	public ModelAndView selectBoardList(CommandMap commandMap) throws Exception{
 		ModelAndView mv = new ModelAndView("jsonView");
-		
-		Map<String, Object> map = commandMap.getMap();
-		if (map.get("BC_BCC_NAME").equals("전체게시판")){
-			map.remove("BC_BCC_NAME");
-		};
-		
+					
 		List<Map<String,Object>> list = boardService.boardList(commandMap.getMap());
 		mv.addObject("list", list);
+		
 		if(list.size() > 0){
-			mv.addObject("TOTAL", list.get(0).get("TOTAL_COUNT"));
+			mv.addObject("TOTAL_B", list.get(0).get("TOTAL_COUNT"));
 		}
 		else{
-			mv.addObject("TOTAL", 0);
+			mv.addObject("TOTAL_B", 0);
 		}
 		
 		return mv;
@@ -200,30 +195,8 @@ public class BoardController {
 		
 		boardService.commentModify(commandMap.getMap());
 		redirect.addAttribute("BC_IDX", commandMap.get("BC_IDX"));
-		//log.info("getmap()"+commandMap.getMap());
-		return mv;
-	}
-	/*
-	//페이징처리
-	@GetMapping("/board/list")
-	public void PagingList(CommandMap commandMap) {}
-
-	@PostMapping("/board/list")
-	public ModelAndView boardPagingList (CommandMap commandMap) throws Exception {
-		ModelAndView mv = new ModelAndView("jsonView");
-
-		List<Map<String, Object>> list = boardService.boardList(commandMap.getMap());
-		mv.addObject("list", list);
-
-		if (list.size() > 0) {
-			mv.addObject("TOTAL_B", list.get(0).get("TOTAL_COUNT"));
-		} else {
-			mv.addObject("TOTAL_B", 0);
-		}
-
-		return mv;
 		
-
+		return mv;
 	}
-	*/
+
 }

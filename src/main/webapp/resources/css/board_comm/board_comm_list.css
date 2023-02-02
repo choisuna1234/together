@@ -20,19 +20,10 @@ section.notice {
 
 #board-search .search-window {
 	background-color: #f9f7f9;
-}
-
-#board-search .search-window .search-wrap {
-	margin: 0 auto;
-	width: 80%;
-	max-width: 564px;
-}
-#board-search .search-window .search-wrap input {
-	height: 40px;
-	width: 80%;
-	font-size: 14px;
-	padding: 7px 14px;
-	border: 1px solid #ccc;
+	max-width: 100%;
+	width: 100%;
+	text-align: center;
+	padding: 20px ;
 }
 
 .board-table {

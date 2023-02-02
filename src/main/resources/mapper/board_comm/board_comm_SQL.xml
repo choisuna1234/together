@@ -15,21 +15,20 @@
 	
 <!-- 게시판 리스트 -->
 <select id="boardList" parameterType="hashmap" resultType="hashmap">
-		
-			<include refid="common.pagingPre"/>
+				<include refid="common.pagingPre"/>
 		SELECT
-		     ROW_NUMBER() OVER (ORDER BY BC_IDX DESC) RNUM, 
+		   	 ROW_NUMBER() OVER (ORDER BY BC_IDX DESC) RNUM, 
 			 BC_IDX,
 			 BC_TITLE,
 			 BC_READHIT,
 			 BC_MOD_DATE,
-			 BC_READHIT,
 			 BC_WRITER_ID,
 			 BC_BCC_NAME
 		FROM
 			 BOARD_COMM
 		WHERE
 			 BC_DEL_GB = 'N'
+	
 			<if test="BC_BCC_NAME != null">
 			AND BC_BCC_NAME = #{BC_BCC_NAME}
 			</if>
@@ -39,6 +38,7 @@
             </if>
             
 			ORDER BY BC_IDX DESC
+			
 			<include refid="common.pagingPost"/>
 </select>
 
