@@ -1,7 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html> 
 <%@ include file="/WEB-INF/include/user-header.jspf"%>
 <link href="/resources/css/board_comm/board_comm_list.css"
 	rel="stylesheet">
@@ -14,6 +12,7 @@
 
 
 <script src="/resources/js/paging/searchPaging_B.js"></script>
+
 
 <main class="layoutCenter">
 	<body>
@@ -151,6 +150,63 @@ $(function() {
 		});
 
 	}); 
+ 
+ $(document).ready(function(){
+		fn_selectBoardList(1);//첫화면 보이기
+		
+		});
 
+function fn_selectBoardList(pageNo) {
+	alert(pageNo);
+	var comAjax = new ComAjax();
+
+	comAjax.setUrl("<c:url value='/pagingBoard/list.paw' />");
+	comAjax.setCallback("fn_selectBoardListCallback");
+
+	comAjax.addParam("PAGE_INDEX", $("#PAGE_INDEX_B").val());
+	comAjax.addParam("PAGE_ROW", 10);
+
+	comAjax.ajax();
+}
+
+function fn_selectBoardListCallback(data) {
+	var total = data.TOTAL_B;
+	var body = $(".board");
+	body.empty(data.TOTAL_B);
+
+	alert();
+	if (total == 0) {
+		var str = "<tr align='center'>"
+				+ "<td colspan='4'>조회된 결과가 없습니다.</td>" + "</tr>";
+		body.append(str);
+
+	} else {
+		var params = {
+			divId : "PAGE_NAVI_B",
+			pageIndex : "PAGE_INDEX_B",
+			totalCount : total,
+			eventName : "fn_selectBoardList",
+		};
+		gfn_renderPaging_B(params);
+
+		var str = "";
+		$.each(data.list, function(key, value) {
+			str += "<tr>"
+						+ "<td align='center'>" + value.BC_IDX + "</td>"
+						+ "<td align='center'>" + value.BC_BCC_NAME + "</td>"
+						+ "<td class='title'>"
+						+ "<a href='#this' name='title'>" + value.BC_TITLE + "</a>"
+						+ "<input type='hidden' name='title' id='IDX' value=" + value.BC_IDX + ">"
+						+ "</td>" 
+						+ "<td align='center'>" + value.BC_WRITER_ID + "</td>"
+						+ "<td align='center'>" + value.BC_READHIT + "</td>" 
+						+ "<td align='center'>" + value.BC_MOD_DATE + "</td>" 
+					+ "</tr>";
+			});
+		body.append(str);
+	}
+
+
+}
 </script>
-</html>
+<%@ include file="/WEB-INF/include/common-footer.jspf"%>

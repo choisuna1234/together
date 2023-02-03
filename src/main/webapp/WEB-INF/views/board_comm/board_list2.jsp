@@ -1,19 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-
-	<%@ include file="/WEB-INF/include/user-header.jspf"%>
-	<link href="/resources/css/board_comm/board_comm_list.css"
-		  rel="stylesheet">
-	<link rel="stylesheet" href="/resources/css/board_comm/toastr.css"
-		  integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g=="
-		  crossorigin="anonymous" referrerpolicy="no-referrer" />
-	<script src="/resources/js/board_comm/toastr.min.js"
-			integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw=="
-			crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
-<!-- <script src="/resources/js/paging/paging.js"></script> -->
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <script src="/resources/js/paging/searchPaging_B.js"></script>
 						<table id="board_list">
 						<tbody class="board">
@@ -42,23 +30,20 @@
 						</tbody>
 						</table>
 						
-						<div id="PAGE_NAVI_B"></div>
+						<ul id="PAGE_NAVI_B"></ul>
 	<input type="hidden" id="PAGE_INDEX_B" name="PAGE_INDEX_B" />
 	<br />
 	
 	<form id="commonForm" name="commonForm"></form>
 						
-<!-- <script type="text/javascript">
+ <script type="text/javascript">
 
-$(document).ready(function() {
-	fn_selectBoardList(1);
-	$("a[name='title']").on("click", function(e) { //제목 
-		e.preventDefault();
-		fn_openBoardDetail($(this));
-	});
-});
+ $(document).ready(function(){
+		fn_selectBoardList(1);//첫화면 보이기
+		});
 
 function fn_selectBoardList(pageNo) {
+	alert(pageNo);
 	var comAjax = new ComAjax();
 
 	comAjax.setUrl("<c:url value='/pagingBoard/list.paw' />");
@@ -66,8 +51,6 @@ function fn_selectBoardList(pageNo) {
 
 	comAjax.addParam("PAGE_INDEX", $("#PAGE_INDEX_B").val());
 	comAjax.addParam("PAGE_ROW", 10);
-
-	comAjax.addParam("keyword", $('#keyword').val());
 
 	comAjax.ajax();
 }
@@ -93,7 +76,7 @@ function fn_selectBoardListCallback(data) {
 		gfn_renderPaging_B(params);
 
 		var str = "";
-		$.each(data.selectBoardList, function(key, value) {
+		$.each(data.list, function(key, value) {
 			str += "<tr>"
 						+ "<td align='center'>" + value.BC_IDX + "</td>"
 						+ "<td align='center'>" + value.BC_BCC_NAME + "</td>"
@@ -109,20 +92,6 @@ function fn_selectBoardListCallback(data) {
 		body.append(str);
 	}
 
-	$("a[name='title']").on("click", function(e) { //제목 
-		e.preventDefault();
-		fn_openBoardDetail($(this));
-	});
-
-	function fn_openBoardDetail(obj) {
-		var comSubmit = new ComSubmit();
-		comSubmit.setUrl("<c:url value='/board/detail.paw' />");
-		comSubmit.addParam("BC_IDX", obj.parent().find("#IDX").val());
-		comSubmit.submit();
-	}
-
 }
 	
-</script>  -->
-
-</html>
+</script>
