@@ -55,20 +55,24 @@ public class BoardController {
 		return mv;
 	}
 
-	/*
-	 * // 멍멍왈왈 게시판 리스트
-	 * 
-	 * @RequestMapping(value = "/board/list2.paw", method=RequestMethod.POST) public
-	 * ModelAndView boardList2(CommandMap commandMap) throws Exception {
-	 * ModelAndView mv = new ModelAndView("board_comm/board_list2"); Map<String,
-	 * Object> map = commandMap.getMap(); if
-	 * (map.get("BC_BCC_NAME").equals("전체게시판")){ map.remove("BC_BCC_NAME"); };
-	 * List<Map<String, Object>> list = boardService.boardList(commandMap.getMap());
-	 * log.info("BoadList2=============="+map); mv.addObject("list", list);
-	 * //글번호,제목,조회수,작성자,작성날짜 담아줌
-	 * 
-	 * return mv; }
-	 */
+	
+	// 멍멍왈왈 게시판 리스트
+	@RequestMapping(value = "/board/list2.paw", method = RequestMethod.POST)
+	public ModelAndView boardList2(CommandMap commandMap) throws Exception {
+		ModelAndView mv = new ModelAndView("board_comm/board_list2");
+		Map<String, Object> map = commandMap.getMap();
+		if (map.get("BC_BCC_NAME").equals("전체게시판")) {
+			map.remove("BC_BCC_NAME");
+		}
+		;
+		List<Map<String, Object>> list = boardService.boardList(commandMap.getMap());
+		log.info("BoadList2==============" + map);
+		mv.addObject("list", list);
+		// 글번호,제목,조회수,작성자,작성날짜 담아줌
+
+		return mv;
+	}
+	 
 
 	//페이징 리스트
 	@RequestMapping(value="/pagingBoard/list")

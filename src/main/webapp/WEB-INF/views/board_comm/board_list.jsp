@@ -15,9 +15,6 @@
 
 <script src="/resources/js/paging/searchPaging_B.js"></script>
 
-
-
-
 <main class="layoutCenter">
 	<body>
 		<section class="notice">
@@ -52,23 +49,23 @@
 					<table class="board-table" id="board_list">
 						<thead>
 						
-								<div align="center" style=padding:10px;>
+								<!-- <div class="cate" align="center" style=padding:10px;>
 									<a class="btn" href="/board/list.paw">전체게시판</a> &nbsp; &nbsp; &nbsp;
 									<a class="btn" href="/board/list.paw?BC_BCC_NAME=자유게시판">자유게시판</a> &nbsp; &nbsp; &nbsp;
 									<a class="btn" href="/board/list.paw?BC_BCC_NAME=정보게시판">정보게시판</a> &nbsp; &nbsp; &nbsp;
 									<a class="btn" href="/board/list.paw?BC_BCC_NAME=긴급실종유기견">긴급실종유기견</a> &nbsp; &nbsp; &nbsp;
 									<a class="btn" href="/board/list.paw?BC_BCC_NAME=자원봉사구해요">자원봉사구해요</a> &nbsp; &nbsp; &nbsp;
-								</div>
+								</div> -->
 								
 								</div>
 								
-								<!-- <div class="tab_radio" >
+								<div class="tab_radio" >
 									<input type="radio" id="a" name="BC_BCC_NAME" value="전체게시판" checked><label for="a">전체게시판</label>
 									<input type="radio" id="b" name="BC_BCC_NAME" value="자유게시판" ><label for="b">자유게시판</label>
 									<input type="radio" id="c" name="BC_BCC_NAME" value="정보게시판" ><label for="c">정보게시판</label>
 									<input type="radio" id="d" name="BC_BCC_NAME" value="긴급실종유기견"><label for="d">긴급실종유기견</label>
 									<input type="radio" id="f" name="BC_BCC_NAME" value="자원봉사구해요" ><label for="f">자원봉사구해요</label>
-								</div> -->
+								</div> 
 							<br>
 							</div>
 						</thead>
@@ -131,73 +128,7 @@ $(function() {
 });
 
 
-function fn_selectBoardList(pageNo) {
-	var comAjax = new ComAjax();
-
-	comAjax.setUrl("<c:url value='/pagingBoard/list.paw' />");
-	comAjax.setCallback("fn_selectBoardListCallback");
-
-	comAjax.addParam("PAGE_INDEX", $("#PAGE_INDEX_B").val());
-	comAjax.addParam("PAGE_ROW", 10);
-
-	comAjax.ajax();
-}
-
-function fn_selectBoardListCallback(data) {
-	var total = data.TOTAL_B;
-	var body = $(".board");
-	body.empty(data.TOTAL_B);
-
-		
-	if (total == 0) {
-		var str = "<tr align='center'>"
-				+ "<td colspan='4'>조회된 결과가 없습니다.</td>" + "</tr>";
-		body.append(str);
-
-	} else {
-		var params = {
-			divId : "PAGE_NAVI_B",
-			pageIndex : "PAGE_INDEX_B",
-			totalCount : total,
-			eventName : "fn_selectBoardList",
-		};
-		gfn_renderPaging_B(params);
-
-		var str = "";
-		$.each(data.list, function(key, value) {
-			str += "<tr>"
-						+ "<td align='center'>" + value.BC_IDX + "</td>"
-						+ "<td align='center'>" + value.BC_BCC_NAME + "</td>"
-						+ "<td class='title'>"
-						+ "<a href='#this' name='title'>" + value.BC_TITLE + "</a>"
-						+ "<input type='hidden' name='title' id='IDX' value=" + value.BC_IDX + ">"
-						+ "</td>" 
-						+ "<td align='center'>" + value.BC_WRITER_ID + "</td>"
-						+ "<td align='center'>" + value.BC_READHIT + "</td>" 
-						+ "<td align='center'>" + value.BC_MOD_DATE + "</td>" 
-					+ "</tr>";
-			});
-		body.append(str);
-	}
-
-	$("a[name='title']").on("click", function(e) { //제목 
-		e.preventDefault();
-		fn_openBoardDetail($(this));
-	});
-
-	function fn_openBoardDetail(obj) {
-		var comSubmit = new ComSubmit();
-		comSubmit.setUrl("<c:url value='/board/detail.paw' />");
-		comSubmit.addParam("BC_IDX", obj.parent().find("#IDX").val());
-		comSubmit.submit();
-	}
-
-}
-	
-
-
-
-/* $(function(){
+ $(function(){
 
 	$("input:radio[name='BC_BCC_NAME']").on('click',function(){
 		var BC_BCC_NAME = $(this).val();
@@ -219,7 +150,7 @@ function fn_selectBoardListCallback(data) {
 
 		});
 
-	}); */
+	}); 
 
 </script>
 </html>

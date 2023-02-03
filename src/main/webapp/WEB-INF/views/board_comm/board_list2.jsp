@@ -48,7 +48,7 @@
 	
 	<form id="commonForm" name="commonForm"></form>
 						
-<script type="text/javascript">
+<!-- <script type="text/javascript">
 
 $(document).ready(function() {
 	fn_selectBoardList(1);
@@ -123,6 +123,6 @@ function fn_selectBoardListCallback(data) {
 
 }
 	
-</script> 
+</script>  -->
 
 </html>
