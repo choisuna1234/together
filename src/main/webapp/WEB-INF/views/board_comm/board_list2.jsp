@@ -29,7 +29,7 @@
 							</c:choose>
 						</tbody>
 						</table>
-						
+						<!-- 
 						<ul id="PAGE_NAVI_B"></ul>
 	<input type="hidden" id="PAGE_INDEX_B" name="PAGE_INDEX_B" />
 	<br />
@@ -38,9 +38,9 @@
 						
  <script type="text/javascript">
 
- $(document).ready(function(){
-		fn_selectBoardList(1);//첫화면 보이기
-		});
+$(document).ready(function(){
+	fn_selectBoardList(1);//첫화면 보이기
+}); 
 
 function fn_selectBoardList(pageNo) {
 	alert(pageNo);
@@ -57,10 +57,11 @@ function fn_selectBoardList(pageNo) {
 
 function fn_selectBoardListCallback(data) {
 	var total = data.TOTAL_B;
-	var body = $(".board");
+	var body = $("table>tbody");
 	body.empty(data.TOTAL_B);
 
 	alert();
+	
 	if (total == 0) {
 		var str = "<tr align='center'>"
 				+ "<td colspan='4'>조회된 결과가 없습니다.</td>" + "</tr>";
@@ -86,12 +87,12 @@ function fn_selectBoardListCallback(data) {
 						+ "</td>" 
 						+ "<td align='center'>" + value.BC_WRITER_ID + "</td>"
 						+ "<td align='center'>" + value.BC_READHIT + "</td>" 
-						+ "<td align='center'>" + value.BC_MOD_DATE + "</td>" 
 					+ "</tr>";
 			});
 		body.append(str);
 	}
 
 }
-	
-</script>
+});
+</script> 
+ -->

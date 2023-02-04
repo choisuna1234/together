@@ -32,6 +32,7 @@
 			<if test="BC_BCC_NAME != null">
 			AND BC_BCC_NAME = #{BC_BCC_NAME}
 			</if>
+			
 			<if test="subKeyword != null">
               AND BC_TITLE LIKE '%'||#{subKeyword}||'%' 
                OR BC_CONTENTS LIKE '%' || #{subKeyword} || '%'
