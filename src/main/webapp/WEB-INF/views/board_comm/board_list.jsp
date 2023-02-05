@@ -186,9 +186,9 @@
 			dataType: "text",
 			success: function (data) {
 				alert(data)
-				//$(".board").html(data);
-				fn_selectBoardList(1);
-				fn_selectBoardListCallback(data);
+				$(".board").html(data);
+				//fn_selectBoardList(1);
+				//fn_selectBoardListCallback(data);
 				
 
 			},
