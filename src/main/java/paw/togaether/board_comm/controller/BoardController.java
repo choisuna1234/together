@@ -85,8 +85,26 @@ public class BoardController {
 		return mv;
 	}
 	 
+	// 멍멍왈왈 게시판2 보여주기만함
+	@RequestMapping(value = "/board/list3")
+	public ModelAndView boardList3(CommandMap commandMap) throws Exception {
+		ModelAndView mv = new ModelAndView("board_comm/board_list2");
+		
+		Map<String, Object> map = commandMap.getMap();
+		
+		if (map.get("BC_BCC_NAME").equals("전체게시판")) {
+			map.remove("BC_BCC_NAME");
+		};
 
-	//페이징 리스트
+		List<Map<String, Object>> list = boardService.boardList(commandMap.getMap());
+		mv.addObject("list", list);
+		// 글번호,제목,조회수,작성자,작성날짜 담아줌
+
+		return mv;
+	}
+	
+	
+	//페이징 리스트2 페이징 처리
 	@RequestMapping(value="/pagingBoard/list")
 	public ModelAndView selectBoardList(CommandMap commandMap) throws Exception{
 		ModelAndView mv = new ModelAndView("jsonView");
@@ -104,7 +122,8 @@ public class BoardController {
 		return mv;
 	}
 	
-	
+	   
+		
 	// 멍멍왈왈 게시판 글 등록폼
 	@RequestMapping(value="/board/writeForm")
 	public ModelAndView boardWriteForm(CommandMap commandMap) throws Exception{
