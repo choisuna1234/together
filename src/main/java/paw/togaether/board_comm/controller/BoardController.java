@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -43,66 +45,15 @@ public class BoardController {
 	
 	// 멍멍왈왈 게시판 리스트
 	@RequestMapping(value = "/board/list", method=RequestMethod.GET)
-	public ModelAndView boardList(CommandMap commandMap) throws Exception {
+	public ModelAndView boardList(CommandMap commandMap,  HttpSession session) throws Exception {
+		
+		System.out.println("mem_id :" + session.getAttribute("mem_id"));
+		
 		ModelAndView mv = new ModelAndView("board_comm/board_list");
-		
-//		List<Map<String, Object>> list = boardService.boardList(commandMap.getMap());
-		
-//		mv.addObject("list", list); //글번호,제목,조회수,작성자,작성날짜 담아줌
-		
-//		Map<String, Object> map = commandMap.getMap();
-		
-//		log.info("BoadList1=============="+ list);
-		
 		
 		return mv;
 	}
-//
-//
-//	// 멍멍왈왈 게시판 리스트
-//	@RequestMapping(value = "/board/list2")
-//	public ModelAndView boardList2(CommandMap commandMap) throws Exception {
-//		ModelAndView mv = new ModelAndView("jsonView");
-//
-//		Map<String, Object> map = commandMap.getMap();
-//
-//		if (map.get("BC_BCC_NAME").equals("전체게시판")) {
-//			map.remove("BC_BCC_NAME");
-//		};
-//
-//		List<Map<String, Object>> list = boardService.boardList(commandMap.getMap());
-//		log.info("BoadList2==============" + map);
-//		mv.addObject("list", list);
-//		// 글번호,제목,조회수,작성자,작성날짜 담아줌
-//
-//		if(list.size() > 0){
-//			mv.addObject("TOTAL_B", list.get(0).get("TOTAL_COUNT"));
-//		}
-//		else{
-//			mv.addObject("TOTAL_B", 0);
-//		}
-//
-//		return mv;
-//	}
-//
-//	// 멍멍왈왈 게시판2 보여주기만함
-//	@RequestMapping(value = "/board/list3")
-//	public ModelAndView boardList3(CommandMap commandMap) throws Exception {
-//		ModelAndView mv = new ModelAndView("board_comm/board_list2");
-//
-//		Map<String, Object> map = commandMap.getMap();
-//
-//		if (map.get("BC_BCC_NAME").equals("전체게시판")) {
-//			map.remove("BC_BCC_NAME");
-//		};
-//
-//		List<Map<String, Object>> list = boardService.boardList(commandMap.getMap());
-//		mv.addObject("list", list);
-//		// 글번호,제목,조회수,작성자,작성날짜 담아줌
-//
-//		return mv;
-//	}
-//
+
 	
 	//페이징 리스트2 페이징 처리
 	@RequestMapping(value="/pagingBoard/list")
@@ -125,10 +76,16 @@ public class BoardController {
 		
 	// 멍멍왈왈 게시판 글 등록폼
 	@RequestMapping(value="/board/writeForm")
-	public ModelAndView boardWriteForm(CommandMap commandMap) throws Exception{
+	public ModelAndView boardWriteForm(CommandMap commandMap,  HttpSession session) throws Exception{
 		ModelAndView mv = new ModelAndView("/board_comm/board_write");
-		return mv;
-	}
+		
+		/*
+		 * String ID = (String) session.getAttribute("mem_id");
+		 * commandMap.getMap().put("ID", session.getAttribute("mem_id"));
+		 */
+	
+	return mv;
+}
 	
 	// 멍멍왈왈 게시판 글 등록
 	@RequestMapping(value = "/board/write")//RedirectAttributes 클래스를 이용해 등록 후 alert창 띄우기 
@@ -201,9 +158,9 @@ public class BoardController {
 	
 	// 댓글 등록
 	@RequestMapping(value = "/comment/write", method = RequestMethod.POST)
-	public ModelAndView commentInsert(CommandMap commandMap, RedirectAttributes redirect) throws Exception {
+	public ModelAndView commentInsert(CommandMap commandMap, RedirectAttributes redirect,  HttpSession session) throws Exception {
 		ModelAndView mv = new ModelAndView("board_comm/board_detail");
-		
+		System.out.println("mem_id :" + session.getAttribute("mem_id"));
 		boardService.commentInsert(commandMap.getMap());
 		
 		return mv;

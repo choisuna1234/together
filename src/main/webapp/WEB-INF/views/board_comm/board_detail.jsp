@@ -128,8 +128,8 @@
 						</c:choose>
 					</tbody>
 				</table>
-				<br> <input type="hidden" name="BNO" id="BNO"
-					value="${map.BC_IDX}" />
+				<br> <input type="hidden" name="BNO" id="BNO" value="${map.BC_IDX}" />
+				<input type="hidden" name="WRITER" id="WRITER" value="${mem_id}">
 				<textarea placeholder="댓글을 입력해주세요." name="CONTENT" id="CONTENT"
 					style="width: 1300px; height: 100px;"></textarea>
 				<br> <br>
@@ -145,9 +145,9 @@ $('#btn').click(function() {
 	
 	const BNO = ${map.BC_IDX};
 	const CONTENT = $('#CONTENT').val();
+	const WRITER = ${mem_id};
 	
-	console.log(BNO);
-	console.log(CONTENT);
+		alert(WRITER);
 	
 			$.ajax({
 				type:'post',
@@ -156,11 +156,13 @@ $('#btn').click(function() {
 					{
 						"BNO":BNO,
 						"CONTENT":CONTENT
+						"WRITER":WRITER
 					},		
 				dataType: "text",
 				success: function (data) {
 					$("CONTENT").html(data);
 					$("BNO").html(data);
+					$("WRITER").html(data);
 					location.reload();
 				},
 				error:function(data){
