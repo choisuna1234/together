@@ -46,63 +46,63 @@ public class BoardController {
 	public ModelAndView boardList(CommandMap commandMap) throws Exception {
 		ModelAndView mv = new ModelAndView("board_comm/board_list");
 		
-		List<Map<String, Object>> list = boardService.boardList(commandMap.getMap());
+//		List<Map<String, Object>> list = boardService.boardList(commandMap.getMap());
 		
-		mv.addObject("list", list); //글번호,제목,조회수,작성자,작성날짜 담아줌
+//		mv.addObject("list", list); //글번호,제목,조회수,작성자,작성날짜 담아줌
 		
-		Map<String, Object> map = commandMap.getMap();
+//		Map<String, Object> map = commandMap.getMap();
 		
-		log.info("BoadList1=============="+ list);
+//		log.info("BoadList1=============="+ list);
 		
 		
 		return mv;
 	}
-
-	
-	// 멍멍왈왈 게시판 리스트
-	@RequestMapping(value = "/board/list2")
-	public ModelAndView boardList2(CommandMap commandMap) throws Exception {
-		ModelAndView mv = new ModelAndView("jsonView");
-		
-		Map<String, Object> map = commandMap.getMap();
-		
-		if (map.get("BC_BCC_NAME").equals("전체게시판")) {
-			map.remove("BC_BCC_NAME");
-		};
-		
-		List<Map<String, Object>> list = boardService.boardList(commandMap.getMap());
-		log.info("BoadList2==============" + map);
-		mv.addObject("list", list);
-		// 글번호,제목,조회수,작성자,작성날짜 담아줌
-		
-		if(list.size() > 0){
-			mv.addObject("TOTAL_B", list.get(0).get("TOTAL_COUNT"));
-		}
-		else{
-			mv.addObject("TOTAL_B", 0);
-		}
-
-		return mv;
-	}
-	 
-	// 멍멍왈왈 게시판2 보여주기만함
-	@RequestMapping(value = "/board/list3")
-	public ModelAndView boardList3(CommandMap commandMap) throws Exception {
-		ModelAndView mv = new ModelAndView("board_comm/board_list2");
-		
-		Map<String, Object> map = commandMap.getMap();
-		
-		if (map.get("BC_BCC_NAME").equals("전체게시판")) {
-			map.remove("BC_BCC_NAME");
-		};
-
-		List<Map<String, Object>> list = boardService.boardList(commandMap.getMap());
-		mv.addObject("list", list);
-		// 글번호,제목,조회수,작성자,작성날짜 담아줌
-
-		return mv;
-	}
-	
+//
+//
+//	// 멍멍왈왈 게시판 리스트
+//	@RequestMapping(value = "/board/list2")
+//	public ModelAndView boardList2(CommandMap commandMap) throws Exception {
+//		ModelAndView mv = new ModelAndView("jsonView");
+//
+//		Map<String, Object> map = commandMap.getMap();
+//
+//		if (map.get("BC_BCC_NAME").equals("전체게시판")) {
+//			map.remove("BC_BCC_NAME");
+//		};
+//
+//		List<Map<String, Object>> list = boardService.boardList(commandMap.getMap());
+//		log.info("BoadList2==============" + map);
+//		mv.addObject("list", list);
+//		// 글번호,제목,조회수,작성자,작성날짜 담아줌
+//
+//		if(list.size() > 0){
+//			mv.addObject("TOTAL_B", list.get(0).get("TOTAL_COUNT"));
+//		}
+//		else{
+//			mv.addObject("TOTAL_B", 0);
+//		}
+//
+//		return mv;
+//	}
+//
+//	// 멍멍왈왈 게시판2 보여주기만함
+//	@RequestMapping(value = "/board/list3")
+//	public ModelAndView boardList3(CommandMap commandMap) throws Exception {
+//		ModelAndView mv = new ModelAndView("board_comm/board_list2");
+//
+//		Map<String, Object> map = commandMap.getMap();
+//
+//		if (map.get("BC_BCC_NAME").equals("전체게시판")) {
+//			map.remove("BC_BCC_NAME");
+//		};
+//
+//		List<Map<String, Object>> list = boardService.boardList(commandMap.getMap());
+//		mv.addObject("list", list);
+//		// 글번호,제목,조회수,작성자,작성날짜 담아줌
+//
+//		return mv;
+//	}
+//
 	
 	//페이징 리스트2 페이징 처리
 	@RequestMapping(value="/pagingBoard/list")
@@ -111,7 +111,6 @@ public class BoardController {
 					
 		List<Map<String,Object>> list = boardService.boardList(commandMap.getMap());
 		mv.addObject("list", list);
-		
 		if(list.size() > 0){
 			mv.addObject("TOTAL_B", list.get(0).get("TOTAL_COUNT"));
 		}

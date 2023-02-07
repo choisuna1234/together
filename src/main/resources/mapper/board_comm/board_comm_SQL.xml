@@ -22,14 +22,14 @@
 			 BC_TITLE,
 			 BC_READHIT,
 			 BC_MOD_DATE,
-			 BC_WRITER_ID,
+	BC_WRITER_NAME,
 			 BC_BCC_NAME
 		FROM
 			 BOARD_COMM
 		WHERE
 			 BC_DEL_GB = 'N'
 	
-			<if test="BC_BCC_NAME != null">
+			<if test='BC_BCC_NAME!="전체게시판"'>
 			AND BC_BCC_NAME = #{BC_BCC_NAME}
 			</if>
 			
