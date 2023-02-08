@@ -11,6 +11,7 @@
 23.01.27 최선아: 게시판 댓글 삭제
 23.01.30 최선아: 게시판 댓글 수정
 23.02.01 최선아: 게시판 전체 검색 및 페이징
+23.02.08 최선아: 마이페이지 내가 쓴 게시글 리스트
 -->
 
 <!-- 게시판 리스트 -->
@@ -194,7 +195,19 @@
 	]]>
 </update> 
 
-
-
+<!-- 마이페이지 내가 쓴 글 리스트 -->
+<select id="myPageList" parameterType="hashmap" resultType="hashmap">
+		SELECT
+			 BC_IDX,
+			 BC_TITLE,
+			 TO_CHAR(SYSDATE, 'YYYYMMDD') AS BC_MOD_DATE,
+			 BC_WRITER_NAME,
+			 BC_BCC_NAME
+		FROM
+			 BOARD_COMM
+		WHERE
+			 BC_WRITER_NAME = #{mem_id, jdbcType=VARCHAR}
+			
+</select>
 
 </mapper>

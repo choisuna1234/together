@@ -34,4 +34,11 @@ public interface BoardService {
 	
 	//댓글 수정
 	void commentModify(Map<String, Object> map) throws Exception;
+	
+	// 마이페이지 내가 쓴 글 게시판 띄우기
+	List<Map<String, Object>> myPageList(Map<String, Object> map) throws Exception;
+	
+	
+	
+	
 }

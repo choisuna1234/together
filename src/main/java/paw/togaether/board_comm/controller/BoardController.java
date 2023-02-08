@@ -1,5 +1,6 @@
 package paw.togaether.board_comm.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -75,17 +76,12 @@ public class BoardController {
 	   
 		
 	// 멍멍왈왈 게시판 글 등록폼
-	@RequestMapping(value="/board/writeForm")
-	public ModelAndView boardWriteForm(CommandMap commandMap,  HttpSession session) throws Exception{
+	@RequestMapping(value = "/board/writeForm")
+	public ModelAndView boardWriteForm(CommandMap commandMap, HttpSession session) throws Exception {
 		ModelAndView mv = new ModelAndView("/board_comm/board_write");
-		
-		/*
-		 * String ID = (String) session.getAttribute("mem_id");
-		 * commandMap.getMap().put("ID", session.getAttribute("mem_id"));
-		 */
-	
-	return mv;
-}
+
+		return mv;
+	}
 	
 	// 멍멍왈왈 게시판 글 등록
 	@RequestMapping(value = "/board/write")//RedirectAttributes 클래스를 이용해 등록 후 alert창 띄우기 
@@ -189,5 +185,32 @@ public class BoardController {
 		
 		return mv;
 	}
+	
+	// 마이페이지에서 내가 쓴 게시글 보기
+	@RequestMapping(value = "/mypage/board/list")
+	public ModelAndView myPageList(CommandMap commandMap, HttpSession session, HttpServletRequest request) throws Exception {
+		ModelAndView mv = new ModelAndView("/mypage/board_comm/list");
+		
+		System.out.println("mem_id :" + session.getAttribute("mem_id"));
+		
+		String mem_id = (String)session.getAttribute("mem_id"); //로그인 아이디가져오기
+		commandMap.put("mem_id", mem_id);
+		
+		List<Map<String,Object>> myPageList = boardService.myPageList(commandMap.getMap());
+		mv.addObject("myPageList", myPageList);
+		
+		
+		mv.addObject("mem_id", session.getAttribute("mem_id"));
+		
+		log.info("mem_id" + commandMap.getMap());	
+		return mv;
+	}
+	
+	/*
+	 * Map<String, Object> mem_id = new HashMap<String, Object>();
+	 * mem_id.put("mem_id", session.getAttribute("mem_id"));
+	 * commandMap.getMap().put("mem_id", mem_id); mv.addObject("mem_id",
+	 * session.getAttribute("mem_id"));
+	 */
 
 }
