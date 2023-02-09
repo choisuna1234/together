@@ -30,15 +30,16 @@
         <div id="board-search">
             <div class="container">
                 <br>
-                <div class="search-window">
-                    <form action="/board/list.paw">
+              <div class="search-window">
+                <form action="/board/subSearch.paw">
                         <div class="search-wrap">
                             <input type="text" class="txt" placeholder="제목이나 내용을 검색하세요"
                                    name="subKeyword" id="subKeyword" value="${subKeyword}"
-                                   style="width: 530px; height: 38px;"/>&nbsp; <input
-                                type="submit" value="검색" class="btn submit"/> <br>
+                                   style="width: 530px; height: 38px;"/>&nbsp; 
+                                   <input type="button" value="검색" class="btn submit" onclick="fn_selectBoardList(1)"/>
+                                 <br>
                         </div>
-                    </form>
+                        </form>
                     <div></div>
                 </div>
             </div>
@@ -95,7 +96,18 @@
 
         comAjax.addParam("PAGE_INDEX", $("#PAGE_INDEX_B").val());
         comAjax.addParam("PAGE_ROW", 10);
+        
         comAjax.addParam("BC_BCC_NAME", BC_BCC_NAME);
+        
+        /* let key = $("#subKeyword").val();
+        if(isNull(key)) key = "";
+        comAjax.addParam("subKeyword", key); */
+        
+       /*  let key1 = $("#BC_BCC_NAME").val();
+        if(isNull(key1)) key1 = "";
+        comAjax.addParam("BC_BCC_NAME", key1); */
+        
+        
         comAjax.ajax();
 
     }
@@ -123,7 +135,7 @@
            
             var str = "";
             $.each(data.list, function (key, value) {
-                str += "<tr class='use_move' data-href='/board/detail.paw' onclick=\"move(this,\'BC_IDX:"+value.BC_IDX+"\')\"> "
+                str += "<tr class='use_move' data-href='/board/detail/"+value.BC_IDX +".paw' onclick=\"move(this,\'BC_IDX:"+value.BC_IDX+"\')\"> "
                 + "<td>" + value.BC_IDX + "</td>"
                 + "<td>" + value.BC_BCC_NAME + "</td>"
                     + "<td>" + value.BC_TITLE + "</td>"

@@ -11,15 +11,13 @@
         <c:when test="${fn:length(list) > 0}">
             <c:forEach items="${list }" var="row">
                 <tr align="center" class="use_move"
-                    data-href="/board/detail.paw"
-                    onclick="move(this,'BC_IDX:${row.BC_IDX}')">
+                    data-href="/board/detail/${row.BC_IDX}.paw" onclick="move(this,'BC_IDX:${row.BC_IDX}')">
                     <td width="8%">${row.BC_IDX }</td>
                     <td width="8%">${row.BC_BCC_NAME }</td>
                     <td width="54%">${row.BC_TITLE }</td>
                     <td width="10%">${row.BC_READHIT }</td>
                     <td width="10%">${row.BC_WRITER_NAME }</td>
-                    <td width="10%"><fmt:formatDate
-                            value="${row.BC_MOD_DATE}" pattern="yyyy-MM-dd"/></td>
+                    <td width="10%"><fmt:formatDate value="${row.BC_MOD_DATE}" pattern="yyyy-MM-dd"/></td>
                 </tr>
             </c:forEach>
         </c:when>

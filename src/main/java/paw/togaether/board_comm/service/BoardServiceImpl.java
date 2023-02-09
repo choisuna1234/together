@@ -83,4 +83,12 @@ public class BoardServiceImpl implements BoardService {
 	public List<Map<String, Object>> myPageList(Map<String, Object> map) throws Exception {
 		return boardDAO.myPageList(map);
 	}
+	
+	// 마이페이지 내가 쓴 댓글 띄우기
+	@Override
+	public List<Map<String, Object>> myPageComment(Map<String, Object> map) throws Exception {
+		return boardDAO.myPageComment(map);
+	}
+		
+	
 }

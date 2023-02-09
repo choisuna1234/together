@@ -78,4 +78,10 @@ public class BoardDAO extends AbstractDAO {
 		
 	}
 	
+	// 마이페이지 내가 쓴 댓글 띄우기
+	@SuppressWarnings("unchecked")
+	public List<Map<String, Object>> myPageComment(Map<String, Object> map) throws Exception {
+		return (List<Map<String, Object>>) selectList("Board.myPageComment", map);
+
+	}
 }

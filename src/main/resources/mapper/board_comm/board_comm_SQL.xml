@@ -12,6 +12,7 @@
 23.01.30 최선아: 게시판 댓글 수정
 23.02.01 최선아: 게시판 전체 검색 및 페이징
 23.02.08 최선아: 마이페이지 내가 쓴 게시글 리스트
+23.02.09 최선아: 마이페이지 내가 쓴 댓글 리스트 출력
 -->
 
 <!-- 게시판 리스트 -->
@@ -208,6 +209,20 @@
 		WHERE
 			 BC_WRITER_NAME = #{mem_id, jdbcType=VARCHAR}
 			
+</select>
+
+<!-- 마이페이지 내가 쓴 댓글 리스트 출력 -->
+<select id="myPageComment" parameterType="hashmap" resultType="hashmap">
+		SELECT
+			 RNO,
+			 BNO,
+			 TO_CHAR(SYSDATE, 'YYYYMMDD') AS REGDATE,
+			 WRITER,
+			 CONTENT
+		FROM
+			 BOARD_COMMENT
+		WHERE
+			 WRITER = #{mem_id, jdbcType=VARCHAR}
 </select>
 
 </mapper>

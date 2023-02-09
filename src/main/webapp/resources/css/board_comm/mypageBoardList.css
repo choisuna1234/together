@@ -97,3 +97,6 @@ margin: 20px;
 	width: 1px;
 	height: 1px;
 }
+.fa-solid, .fas {
+font-size: 20px; 
+}
