@@ -31,7 +31,6 @@
             <div class="container">
                 <br>
               <div class="search-window">
-                <form action="/board/subSearch.paw">
                         <div class="search-wrap">
                             <input type="text" class="txt" placeholder="제목이나 내용을 검색하세요"
                                    name="subKeyword" id="subKeyword" value="${subKeyword}"
@@ -39,7 +38,7 @@
                                    <input type="button" value="검색" class="btn submit" onclick="fn_selectBoardList(1)"/>
                                  <br>
                         </div>
-                        </form>
+                        
                     <div></div>
                 </div>
             </div>

@@ -75,23 +75,6 @@ public class BoardController {
 		return mv;
 	}
 	
-	// 멍멍왈왈 게시판 검색
-	@RequestMapping(value = "/board/subSearch", method = RequestMethod.GET)
-	public ModelAndView subSearch(CommandMap commandMap, HttpSession session) throws Exception {
-		ModelAndView mv = new ModelAndView("board_comm/board_list");
-		
-		List<Map<String,Object>> list = boardService.boardList(commandMap.getMap());
-		mv.addObject("list", list);
-		
-		Map<String, Object> map = commandMap.getMap();
-		if (map.get("BC_BCC_NAME").equals("전체게시판")) {
-			map.remove("BC_BCC_NAME");
-		};
-		
-		return mv;
-	}
-		
-		
 	// 멍멍왈왈 게시판 글 등록폼
 	@RequestMapping(value = "/board/writeForm")
 	public ModelAndView boardWriteForm(CommandMap commandMap, HttpSession session) throws Exception {
@@ -119,7 +102,7 @@ public class BoardController {
 		ModelAndView mv = new ModelAndView("/board_comm/board_detail");
 		
 		System.out.println(BC_IDX);
-		commandMap.put("BC_IDX", BC_IDX);
+		commandMap.put("BC_IDX", BC_IDX); //댓글 수정쪽 바로 게시글 번호를 받아와야해서 넣어줌
 		
 		log.fatal("Controller>detail>getmap():"+commandMap.getMap());
 		
@@ -142,6 +125,7 @@ public class BoardController {
 		
 		log.info("getmap()"+commandMap.getMap());
 		Map<String,Object> map = boardService.boardDetail(commandMap.getMap());
+		
 		log.info("returned map"+map);
 		mv.addObject("map", map);
 		
@@ -197,7 +181,7 @@ public class BoardController {
 	//댓글 수정하기
 	@RequestMapping(value = "/comment/modify", method = RequestMethod.POST) 
 	public ModelAndView commentModify(CommandMap commandMap, RedirectAttributes redirect) throws Exception {
-		ModelAndView mv = new ModelAndView("redirect:/board/detail/{BC_IDX}.paw");
+		ModelAndView mv = new ModelAndView("redirect:/board/detail/{BC_IDX}.paw"); 
 		
 		boardService.commentModify(commandMap.getMap());
 		redirect.addAttribute("BC_IDX", commandMap.get("BC_IDX"));  //댓글 수정 후 게시글 번호 자동으로 가져와야해서 넣어줌
@@ -218,7 +202,7 @@ public class BoardController {
 		mv.addObject("mem_id", session.getAttribute("mem_id"));
 		List<Map<String,Object>> myPageComment = boardService.myPageComment(commandMap.getMap());  //댓글 리스트 가져오기
 		
-		redirect.addAttribute("BC_IDX", commandMap.get("BC_IDX"));
+		redirect.addAttribute("BC_IDX", commandMap.get("BC_IDX")); 
 		mv.addObject("myPageComment", myPageComment);
 		
 		
