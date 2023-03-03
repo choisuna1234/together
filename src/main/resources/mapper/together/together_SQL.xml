@@ -300,14 +300,27 @@
 				   b.BR_IDX,
 				   b.BR_NAME,
 				   w.TW_TO_IDX,
-				   (SELECT COUNT (TW_IDX) FROM TOGETHER_WITH WHERE TW_MEM_ID = MEM_ID) AS WITH_COUNT
-			FROM MEMBERS m, BREED b, TOGETHER_WITH w
+				   (SELECT COUNT (TW_IDX) FROM TOGETHER_WITH WHERE TW_MEM_ID = MEM_ID) AS WITH_COUNT,
+				   p.PH_IDX,
+				   p.PH_MEM_ID,
+				   p.PH_ORIGINAL_FILE_NAME,
+				   p.PH_STORED_FILE_NAME,
+				   p.PH_DEL_GB,
+				   t.TO_WRITER_ID,
+				   t.TO_IDX,
+				   TO_CHAR(TO_DATE, 'YYYY-MM-DD')as TO_DATE,
+					t.TO_TIME
+			FROM MEMBERS m, BREED b, TOGETHER_WITH w, PHOTO p, TOGETHER t
 			WHERE 
 				MEM_ID = #{TW_MEM_ID, jdbcType=VARCHAR}
 			AND 
 				m.MEM_BR_IDX = b.BR_IDX
 			AND 
 				w.TW_TO_IDX = #{TO_IDX,jdbcType=VARCHAR}
+			AND 
+				p.PH_MEM_ID = #{TW_MEM_ID, jdbcType = VARCHAR}
+			AND 
+				t.TO_IDX = #{TO_IDX, jdbcType = VARCHAR}
 			 GROUP BY m.MEM_ID,
 					   m.MEM_DOG_NAME,
 					   m.MEM_DOG_WEIGHT,
@@ -316,7 +329,17 @@
 					   b.BR_IDX,
 					   b.BR_NAME,
 					   w.TW_TO_IDX,
-					   MEM_REG_DATE	
+					   MEM_REG_DATE,
+					   p.PH_IDX,
+					   p.PH_MEM_ID,
+					   p.PH_ORIGINAL_FILE_NAME,
+					   p.PH_STORED_FILE_NAME,
+					   p.PH_DEL_GB,
+					   t.TO_WRITER_ID,
+					   t.TO_IDX,
+					   TO_DATE,
+					   t.TO_TIME
+					   
 		]]>
 	</select>
 	
@@ -332,14 +355,21 @@
 				   b.BR_IDX,
 				   b.BR_NAME,
 				   t.TO_IDX, 
-				   t.TO_WRITER_ID
-			FROM MEMBERS m, BREED b, TOGETHER t
+				   t.TO_WRITER_ID,
+				   p.PH_IDX,
+				   p.PH_MEM_ID,
+				   p.PH_ORIGINAL_FILE_NAME,
+				   p.PH_STORED_FILE_NAME,
+				   p.PH_DEL_GB
+			FROM MEMBERS m, BREED b, TOGETHER t, PHOTO p
 			WHERE 
 				MEM_ID = #{TO_WRITER_ID, jdbcType = VARCHAR}
 			AND 
 				m.MEM_BR_IDX = b.BR_IDX
 			AND 
 				t.TO_IDX = #{TO_IDX, jdbcType = VARCHAR}
+			AND 
+				p.PH_MEM_ID = #{TO_WRITER_ID, jdbcType = VARCHAR}
 			 GROUP BY m.MEM_ID,
 					   m.MEM_DOG_NAME,
 					   m.MEM_DOG_WEIGHT,
@@ -349,9 +379,25 @@
 					   b.BR_NAME,
 					  t.TO_IDX, 
 					   t.TO_WRITER_ID,
-					   MEM_REG_DATE
+					   MEM_REG_DATE,
+					   p.PH_IDX,
+					   p.PH_MEM_ID,
+					   p.PH_ORIGINAL_FILE_NAME,
+					   p.PH_STORED_FILE_NAME,
+					   p.PH_DEL_GB
 		]]>
 	</select>
 	
+	<!-- 23.02.23 박선영 참여거절하기 -->
+	<delete id="withDel">
+		<![CDATA[
+			DELETE 
+			FROM TOGETHER_WITH
+			WHERE 
+				TW_TO_IDX = #{TW_TO_IDX, jdbcType=VARCHAR}
+			AND 
+				TW_MEM_ID = #{TW_MEM_ID, jdbcType=VARCHAR}
+		]]>
+	</delete>
 	
 </mapper>

@@ -62,7 +62,7 @@ font-size: 13px;
 								</div>
 								
 								<div class="fontPosition" style="float:right">
-									<i class="fa-solid fa-user"> ${map.BC_WRITER_NAME } 님</i>
+									<i class="fa-solid fa-user"> ${map.BC_WRITER_NAME } ë</i>
 									<i class="fa-solid fa-list-ol"> ${map.BC_IDX } </i> 
 								</div>
 							</div>
