@@ -27,7 +27,7 @@
 <img alt="Spring" src ="https://img.shields.io/badge/Spring 5-6DB33F?&style=for-the-badge&logo=Spring&logoColor=white"/> <img alt="Mybatis" src ="https://img.shields.io/badge/Mybatis-000000?&style=for-the-badge&logo=Twitter&logoColor=white"/> <img alt="Font Awesome 6" src ="https://img.shields.io/badge/Font Awesome 6-528DD7?&style=for-the-badge&logo=Font Awesome&logoColor=white"/> <img alt="Apache Maven" src ="https://img.shields.io/badge/Apache Maven-C71A36?&style=for-the-badge&logo=Apache Maven&logoColor=white"/>
 </div>
 <br/>
-
+__
 ## 🗃 프로젝트 구조
 ### 유스케이스 다이어그램
 <table>
